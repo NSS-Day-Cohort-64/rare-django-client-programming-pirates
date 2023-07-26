@@ -1,12 +1,14 @@
 import { useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { loginUser } from "../../managers/AuthManager"
+import { getUser } from "../../APIManager"
 
-export const Login = ({ setToken }) => {
+export const Login = ({ setToken, setIsAdmin }) => {
   const username = useRef()
   const password = useRef()
   const navigate = useNavigate()
   const [isUnsuccessful, setisUnsuccessful] = useState(false)
+
 
   const handleLogin = (e) => {
     e.preventDefault()
@@ -16,10 +18,12 @@ export const Login = ({ setToken }) => {
       password: password.current.value
     }
 
+    
     loginUser(user).then(response => {
       const res = JSON.parse(response)
       if ("valid" in res && res.valid) {
         setToken(res.token)
+        setIsAdmin(res.token)
         navigate("/")
       }
       else {
