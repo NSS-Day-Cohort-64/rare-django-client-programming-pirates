@@ -16,7 +16,8 @@ export const Login = ({ setToken }) => {
       password: password.current.value
     }
 
-    loginUser(user).then(res => {
+    loginUser(user).then(response => {
+      const res = JSON.parse(response)
       if ("valid" in res && res.valid) {
         setToken(res.token)
         navigate("/")
