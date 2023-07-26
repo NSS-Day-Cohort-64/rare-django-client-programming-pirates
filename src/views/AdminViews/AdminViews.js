@@ -1,3 +1,5 @@
+import { AdminSelectedPostDetails } from "../../components/posts/AdminPosts/AdminPostDetails"
+
 export const AdminViews = () => {
 return (
     <>
@@ -6,7 +8,9 @@ return (
     
     <Route path="INSERT PROFILE PATH HERE" element={< INSERT ELEMENT HERE />} />
     
-    <Route path="INSERT ALL POSTS PATH HERE" element={< INSERT ELEMENT HERE />} />
+    <Route path="posts/AdminPosts/AdminPostDetails/:postId" element={ <AdminSelectedPostDetails/>} />
+    
+    <Route path="posts/AdminPosts/AdminAllPosts" element={ <AdminViews />} />
     
     <Route path="INSERT MYPOSTS PATH HERE" element={< INSERT ELEMENT HERE />} />
     
