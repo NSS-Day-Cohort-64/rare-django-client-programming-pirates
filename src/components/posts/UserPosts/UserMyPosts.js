@@ -12,12 +12,16 @@ export const MyPosts = () => {
   const rareUserId = localStorage.getItem("auth_token");
   const rareUser = JSON.parse(rareUserId);
 
-  useEffect(() => {
+  const fetchedPosts = () => {
     fetch(`http://localhost:8088/posts`)
       .then((response) => response.json())
       .then((postData) => {
         updatePosts(postData);
       });
+  };
+
+  useEffect(() => {
+    fetchedPosts();
   }, []);
 
   useEffect(() => {
@@ -34,7 +38,11 @@ export const MyPosts = () => {
   };
 
   const handleDelete = () => {
-    // Delete logic would go here
+    fetch(`http://localhost:8088/posts/${selectedPost.id}`, {
+      method: "DELETE",
+    }).then(() => {
+      fetchedPosts();
+    });
     console.log("Deleting post:", selectedPost);
     setModalsVisible({ ...modalsVisible, deleteModalVisible: false });
   };
