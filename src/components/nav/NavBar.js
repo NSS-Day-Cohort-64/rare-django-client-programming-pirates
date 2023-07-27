@@ -1,19 +1,10 @@
-import { useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import "./NavBar.css";
-import Logo from "./rare.jpeg";
+import "./NavBar.css"
+import { AdminNavBar } from "./AdminNavBar"
+import { UserNavBar } from "./UserNavBar"
 
-export const NavBar = ({ token, setToken, setIsAdmin }) => {
-  const navigate = useNavigate()
-  const navbar = useRef()
-  const hamburger = useRef()
-
-  const showMobileNavbar = () => {
-    hamburger.current.classList.toggle("is-active");
-    navbar.current.classList.toggle("is-active");
-  };
-
+export const NavBar = ({ token, setToken, isAdmin, setIsAdmin }) => {
   return (
+<<<<<<< HEAD
     <nav
       className="navbar is-success mb-3"
       role="navigation"
@@ -82,5 +73,12 @@ export const NavBar = ({ token, setToken, setIsAdmin }) => {
         </div>
       </div>
     </nav>
+=======
+    isAdmin ? (
+      <AdminNavBar token={token} setToken={setToken} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
+    ) : (
+      <UserNavBar token={token} setToken={setToken} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
+    )
+>>>>>>> 434984b4884cbb58699fb86e301f358233c29dca
   );
 };
