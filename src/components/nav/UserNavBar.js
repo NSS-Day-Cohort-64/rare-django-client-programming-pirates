@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const UserNavBar = () => {
   <div>
     <ul>
@@ -7,6 +9,9 @@ export const UserNavBar = () => {
         </Link>
         <Link to="/categoryManager" className="navbar-item">
           Categories
+        </Link>
+        <Link to="/myPosts" className="navbar-item">
+          My Posts
         </Link>
       </li>
     </ul>

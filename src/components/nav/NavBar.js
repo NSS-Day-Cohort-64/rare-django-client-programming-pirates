@@ -4,9 +4,9 @@ import "./NavBar.css";
 import Logo from "./rare.jpeg";
 
 export const NavBar = ({ token, setToken, setIsAdmin }) => {
-  const navigate = useNavigate()
-  const navbar = useRef()
-  const hamburger = useRef()
+  const navigate = useNavigate();
+  const navbar = useRef();
+  const hamburger = useRef();
 
   const showMobileNavbar = () => {
     hamburger.current.classList.toggle("is-active");
@@ -51,6 +51,9 @@ export const NavBar = ({ token, setToken, setIsAdmin }) => {
               <Link to="/categoryManager" className="navbar-item">
                 Categories
               </Link>
+              <Link to="/myPosts" className="navbar-item">
+                My Posts
+              </Link>
             </>
           ) : (
             ""
@@ -60,20 +63,27 @@ export const NavBar = ({ token, setToken, setIsAdmin }) => {
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              {
-                token
-                  ?
-                  <button className="button is-outlined" onClick={() => {
-                    setToken('')
-                    setIsAdmin(0)
-                    navigate('/login')
-                  }}>Logout</button>
-                  :
-                  <>
-                    <Link to="/register" className="button is-link">Register</Link>
-                    <Link to="/login" className="button is-outlined">Login</Link>
-                  </>
-              }
+              {token ? (
+                <button
+                  className="button is-outlined"
+                  onClick={() => {
+                    setToken("");
+                    setIsAdmin(0);
+                    navigate("/login");
+                  }}
+                >
+                  Logout
+                </button>
+              ) : (
+                <>
+                  <Link to="/register" className="button is-link">
+                    Register{" "}
+                  </Link>
+                  <Link to="/login" className="button is-outlined">
+                    Login
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

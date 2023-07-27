@@ -1,18 +1,17 @@
-import { Route, Routes } from "react-router-dom"
-import { AdminHome } from "../../components/home/AdminHome"
-import { CategoryList } from "../../managers/CategoryManager"
-
+import { Route, Routes } from "react-router-dom";
+import { AdminHome } from "../../components/home/AdminHome";
+import { CategoryList } from "../../managers/CategoryManager";
+import { MyPosts } from "../../components/posts/UserPosts/UserMyPosts";
 
 export const AdminViews = () => {
-    return (
-        <Routes>
-            <Route path="/" element={<AdminHome />} />
-            <Route path="/categoryManager" element={<CategoryList />} />
-
-
-        </Routes>
-    )
-}
+  return (
+    <Routes>
+      <Route path="/" element={<AdminHome />} />
+      <Route path="/categoryManager" element={<CategoryList />} />
+      <Route path="/myPosts" element={<MyPosts />} />
+    </Routes>
+  );
+};
 
 /*
 <Route path="INSERT PROFILE PATH HERE" element={< INSERT ELEMENT HERE />} />
