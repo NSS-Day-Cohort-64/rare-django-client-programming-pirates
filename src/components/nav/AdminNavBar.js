@@ -40,28 +40,22 @@ export const AdminNavBar = ({ token, setToken, isAdmin, setIsAdmin }) => {
           <span aria-hidden="true"></span>
         </a>
       </div>
-
-      <div className="navbar-menu" ref={navbar}>
-        <div className="navbar-start">
-          {token ? (
-            <>
-              <Link to="/" className="navbar-item">
-                Posts
-              </Link>
-              <Link to="/categoryManager" className="navbar-item">
-                Category Manager
-              </Link>
-              <Link to="/tagManager" className="navbar-item">
-                Tag Manager
-              </Link>
-              <Link to="/MyPosts" className="navbar-item">
-                My Posts
-              </Link>
-            </>
-          ) : (
-            ""
-          )}
-        </div>
+            <div className="navbar-menu" ref={navbar}>
+                <div className="navbar-start">
+                    {
+                        token
+                            ?
+                            <>
+                            <Link to="/" className="navbar-item">Posts</Link>
+                            <Link to="/categoryManager" className="navbar-item">Category Manager</Link>
+                            <Link to="/tagManager" className="navbar-item">Tag Manager</Link>
+                            <Link to="/newPost" className="navbar-item">New Post</Link>
+                            <Link to="/MyPosts" className="navbar-item">My Posts</Link>
+                            </>
+                            :
+                            ""
+                    }
+                </div>
 
         <div className="navbar-end">
           <div className="navbar-item">
