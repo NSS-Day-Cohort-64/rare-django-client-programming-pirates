@@ -12,11 +12,8 @@ export const AdminViews = () => {
             <Route path="/" element={<AdminHome />} />
             <Route path="/categoryManager" element={<CategoryList />} />
             <Route path="/tagManager" element={<TagManagerAndCreator />} />
-            <Route path="/categoryManager" element={<CategoryList />} />
-            <Route path="/tagManager" element={<TagManagerAndCreator />} />
-
-
-
+            <Route path="/posts/AdminPosts/AdminAllPosts" element={ <AdminPostsList />} />
+            <Route path="/posts/AdminPosts/AdminAllPosts/AdminPostDetails/:postId" element={ <AdminSelectedPostDetails/>} />
         </Routes>
     )
 }

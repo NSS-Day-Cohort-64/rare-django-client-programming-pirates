@@ -9,13 +9,13 @@ export const AdminSelectedPostDetails = () => {
         fetch(`http://localhost:8088/posts/${postId}`)
             .then(response => response.json())
             .then((postArray) => {
-                setSelectedPost(postArray)
+                setSelectedPost([postArray])
             })
     }
 
     useEffect(() => {
         getPosts()
-    }, [postId]);
+    }, []);
 
     return (
         <div>
@@ -25,8 +25,8 @@ export const AdminSelectedPostDetails = () => {
                     {selectedPost.map((post) => (
                         <li key={post.id}>
                             <h3>{post.title}</h3>
-                            <p>Author: {post.user.first_name} {post.user.last_name}</p>
-                            <p>Category: {post.category.label}</p>
+                            <p>Author: {post.user?.first_name} {post.user?.last_name}</p>
+                            <p>Category: {post.category?.label}</p>
                             <p>Publication date: {post.publication_date}</p>
                             <p>Content: {post.content}</p>
                         </li>
