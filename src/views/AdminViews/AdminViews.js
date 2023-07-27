@@ -10,7 +10,7 @@ import { TagManagerAndCreator } from "../../ManagerTags/TagManager.js"
 export const AdminViews = () => {
     return (
         <Routes>
-            <Route path="/" element={<AdminHome />} />
+            <Route path="/posts/AdminPosts/AdminAllPosts" element={< AdminPostsList />} />
             <Route path="/categoryManager" element={<CategoryList />} />
             <Route path="/newPost" element={<CreateNewPost />} />
             <Route path="/tagManager" element={<TagManagerAndCreator />} />

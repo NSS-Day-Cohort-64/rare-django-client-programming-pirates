@@ -10,7 +10,7 @@ import { MyPosts } from "../../components/posts/UserPosts/UserMyPosts"
 export const UserViews = () => {
     return (
         <Routes>
-            <Route path="/" element={<UserHome />} />
+            <Route path="/posts/UserPosts/UserAllPosts" element={< UserPostsList />} />
             <Route path="/categoryManager" element={<CategoryList />} />
             <Route path="/tagManager" element={<TagManagerAndCreator />} />
             <Route path="/posts/UserPosts/UserAllPosts" element={ <UserPostsList />} />
