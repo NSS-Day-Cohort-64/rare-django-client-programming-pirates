@@ -4,6 +4,8 @@ import { Register } from "../components/auth/Register";
 import { Authorized } from "./Authorized";
 import { AdminViews } from "./AdminViews/AdminViews";
 import { UserViews } from "./UserViews/UserViews";
+import { CategoryList } from "../managers/CategoryManager";
+
 
 export const ApplicationViews = ({ token, setToken, isAdmin, setIsAdmin }) => {
 

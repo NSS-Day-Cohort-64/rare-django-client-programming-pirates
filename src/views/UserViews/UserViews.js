@@ -1,14 +1,16 @@
 import { Route, Routes } from "react-router-dom"
 import { UserHome } from "../../components/home/UserHome"
+import { CategoryList } from "../../managers/CategoryManager"
+
 
 export const UserViews = () => {
-   return (
-      <Routes>
-          <Route path="/" element={<UserHome />} />
-      
-  
-      </Routes>
-  )
+    return (
+        <Routes>
+            <Route path="/" element={<UserHome />} />
+            <Route path="/categoryManager" element={<CategoryList />} />
+
+        </Routes>
+    )
 }
 
 /*
@@ -20,5 +22,4 @@ export const UserViews = () => {
     
     <Route path="INSERT TAG MANAGER PATH HERE" element={<INSERT ELEMENT HERE />} />
     
-    <Route path="INSERT CATEGORY MANAGER PATH HERE" element={<INSERT ELEMENT HERE />} />
 */
