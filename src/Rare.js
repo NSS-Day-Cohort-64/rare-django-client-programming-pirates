@@ -14,10 +14,18 @@ export const Rare = () => {
   }
 
   const setIsAdmin = async (id) => {
-    const user = await getUser(id)
-    const newAdmin = user.is_admin
-    localStorage.setItem("admin", newAdmin)
-    setIsAdminState(newAdmin)
+    if(id != 0) {
+      const user = await getUser(id)
+      const newAdmin = user.is_admin
+      localStorage.setItem("admin", newAdmin)
+      setIsAdminState(newAdmin)
+    }
+    else {
+      const newAdmin = 0
+      localStorage.setItem("admin", newAdmin)
+      setIsAdminState(newAdmin)
+    }
+
   }
 
   return <>
