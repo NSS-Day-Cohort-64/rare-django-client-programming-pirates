@@ -1,0 +1,44 @@
+/* style.css */
+
+.user-list-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .user-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .user-item {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  label {
+    margin-left: 10px;
+  }
+  
+  /* Style the checkbox */
+  input[type="checkbox"] {
+    margin-right: 5px;
+  }
+  
+  /* Style the label and checkbox together */
+  label input[type="checkbox"] {
+    vertical-align: middle;
+  }
+  

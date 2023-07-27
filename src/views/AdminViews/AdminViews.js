@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom"
 import { AdminHome } from "../../components/home/AdminHome"
 import { CategoryList } from "../../managers/CategoryManager"
 import { TagManagerAndCreator } from "../../ManagerTags/TagManager.js"
+import { UserListManager } from "../../managers/AdminUserListManager.js"
 
 
 export const AdminViews = () => {
@@ -10,6 +11,7 @@ export const AdminViews = () => {
             <Route path="/" element={<AdminHome />} />
             <Route path="/categoryManager" element={<CategoryList />} />
             <Route path="/tagManager" element={<TagManagerAndCreator />} />
+            <Route path="/userListManager" element={<UserListManager />} />
 
 
 
