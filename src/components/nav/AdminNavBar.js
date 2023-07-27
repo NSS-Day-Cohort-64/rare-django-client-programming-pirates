@@ -40,7 +40,6 @@ export const AdminNavBar = ({ token, setToken, isAdmin, setIsAdmin }) => {
           <span aria-hidden="true"></span>
         </a>
       </div>
-
       <div className="navbar-menu" ref={navbar}>
         <div className="navbar-start">
           {token ? (
@@ -54,6 +53,9 @@ export const AdminNavBar = ({ token, setToken, isAdmin, setIsAdmin }) => {
               <Link to="/tagManager" className="navbar-item">
                 Tag Manager
               </Link>
+              <Link to="/newPost" className="navbar-item">
+                New Post
+              </Link>
               <Link to="/MyPosts" className="navbar-item">
                 My Posts
               </Link>
@@ -62,31 +64,32 @@ export const AdminNavBar = ({ token, setToken, isAdmin, setIsAdmin }) => {
             ""
           )}
         </div>
-      </div>
-      <div className="navbar-end">
-        <div className="navbar-item">
-          <div className="buttons">
-            {token ? (
-              <button
-                className="button is-outlined"
-                onClick={() => {
-                  setToken("");
-                  setIsAdmin(0);
-                  navigate("/login");
-                }}
-              >
-                Logout
-              </button>
-            ) : (
-              <>
-                <Link to="/register" className="button is-link">
-                  Register
-                </Link>
-                <Link to="/login" className="button is-outlined">
-                  Login
-                </Link>
-              </>
-            )}
+
+        <div className="navbar-end">
+          <div className="navbar-item">
+            <div className="buttons">
+              {token ? (
+                <button
+                  className="button is-outlined"
+                  onClick={() => {
+                    setToken("");
+                    setIsAdmin(0);
+                    navigate("/login");
+                  }}
+                >
+                  Logout
+                </button>
+              ) : (
+                <>
+                  <Link to="/register" className="button is-link">
+                    Register
+                  </Link>
+                  <Link to="/login" className="button is-outlined">
+                    Login
+                  </Link>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>
