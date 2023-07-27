@@ -1,14 +1,16 @@
 import { Route, Routes } from "react-router-dom";
 import { AdminHome } from "../../components/home/AdminHome";
-import { CategoryList } from "../../managers/CategoryManager";
 import { MyPosts } from "../../components/posts/UserPosts/UserMyPosts";
+import { CategoryList } from "../../managers/CategoryManager";
+import { TagManagerAndCreator } from "../../ManagerTags/TagManager.js";
 
 export const AdminViews = () => {
   return (
     <Routes>
       <Route path="/" element={<AdminHome />} />
       <Route path="/categoryManager" element={<CategoryList />} />
-      <Route path="/myPosts" element={<MyPosts />} />
+      <Route path="/tagManager" element={<TagManagerAndCreator />} />
+      <Route path="/MyPosts" element={<MyPosts />} />
     </Routes>
   );
 };
