@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import "./NavBar.css"
 import Logo from "./rare.jpeg"
 
-export const NavBar = ({ token, setToken }) => {
+export const NavBar = ({ token, setToken, setIsAdmin }) => {
   const navigate = useNavigate()
   const navbar = useRef()
   const hamburger = useRef()
@@ -45,6 +45,7 @@ export const NavBar = ({ token, setToken }) => {
                   ?
                   <button className="button is-outlined" onClick={() => {
                     setToken('')
+                    setIsAdmin(0)
                     navigate('/login')
                   }}>Logout</button>
                   :
