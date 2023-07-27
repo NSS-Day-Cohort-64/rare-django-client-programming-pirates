@@ -20,11 +20,11 @@ export const AdminPostsList = () => {
     return (
         <div>
             <h1>All Posts</h1>
-            <ul>
+            <ul className="post-list">
                 <article className="post">
                     {posts.map((post) => (
-                        <li key={post.id}>
-                            <Link to={`posts/AdminPosts/AdminPostDetails/${post.id}`}>
+                        <li key={post.id} className="post-box">
+                            <Link to={`AdminPostDetails/${post.id}`}>
                                 <h3>{post.title}</h3>
                             </Link>
                             <p>Author: {post.user.first_name} {post.user.last_name}</p>
