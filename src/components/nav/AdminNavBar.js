@@ -1,7 +1,7 @@
-import { useRef } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import "./NavBar.css"
-import Logo from "./rare.jpeg"
+import { useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./NavBar.css";
+import Logo from "./rare.jpeg";
 
 export const AdminNavBar = ({ token, setToken, isAdmin, setIsAdmin }) => {
     const navigate = useNavigate()
@@ -36,6 +36,7 @@ export const AdminNavBar = ({ token, setToken, isAdmin, setIsAdmin }) => {
                             <>
                             <Link to="/" className="navbar-item">Posts</Link>
                             <Link to="/categoryManager" className="navbar-item">Category Manager</Link>
+                            <Link to="/tagManager" className="navbar-item">Tag Manager</Link>
                             <Link to="/newPost" className="navbar-item">New Post</Link>
                             </>
                             :
@@ -46,24 +47,31 @@ export const AdminNavBar = ({ token, setToken, isAdmin, setIsAdmin }) => {
                 <div className="navbar-end">
                     <div className="navbar-item">
                         <div className="buttons">
-                            {
-                                token
-                                    ?
-                                    <button className="button is-outlined" onClick={() => {
-                                        setToken('')
-                                        setIsAdmin(0)
-                                        navigate('/login')
-                                    }}>Logout</button>
-                                    :
-                                    <>
-                                        <Link to="/register" className="button is-link">Register</Link>
-                                        <Link to="/login" className="button is-outlined">Login</Link>
-                                    </>
-                            }
+                            {token ? (
+                                <button
+                                    className="button is-outlined"
+                                    onClick={() => {
+                                        setToken("");
+                                        setIsAdmin(0);
+                                        navigate("/login");
+                                    }}
+                                >
+                                    Logout
+                                </button>
+                            ) : (
+                                <>
+                                    <Link to="/register" className="button is-link">
+                                        Register
+                                    </Link>
+                                    <Link to="/login" className="button is-outlined">
+                                        Login
+                                    </Link>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
             </div>
         </nav>
-    )
-}
+    );
+};
