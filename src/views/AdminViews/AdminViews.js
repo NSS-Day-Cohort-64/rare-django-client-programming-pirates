@@ -16,20 +16,8 @@ export const AdminViews = () => {
             <Route path="/tagManager" element={<TagManagerAndCreator />} />
             <Route path="/posts/AdminPosts/AdminAllPosts" element={ <AdminPostsList />} />
             <Route path="/posts/AdminPosts/AdminAllPosts/AdminPostDetails/:postId" element={ <AdminSelectedPostDetails/>} />
+            <Route path="/newPost" element={<CreateNewPost />} />
+            <Route path="/MyPosts" element={<MyPosts />} />
         </Routes>
     )
 }
-
-/*
-
-
-<Route path="INSERT PROFILE PATH HERE" element={< INSERT ELEMENT HERE />} />
-
-<Route path="INSERT ALL POSTS PATH HERE" element={< INSERT ELEMENT HERE />} />
-
-<Route path="INSERT MYPOSTS PATH HERE" element={< INSERT ELEMENT HERE />} />
-
-<Route path="INSERT TAG MANAGER PATH HERE" element={< INSERT ELEMENT HERE />} />
-
-<Route path="INSERT USER LIST MANAGER PATH HERE" element={< INSERT ELEMENT HERE />} />
-*/

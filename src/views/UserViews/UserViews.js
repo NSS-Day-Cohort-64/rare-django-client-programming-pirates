@@ -14,10 +14,10 @@ export const UserViews = () => {
             <Route path="/tagManager" element={<TagManagerAndCreator />} />
             <Route path="/posts/UserPosts/UserAllPosts" element={ <UserPostsList />} />
             <Route path="/posts/UserPosts/UserAllPosts/UserPostDetails/:postId" element={ <UserSelectedPostDetails />} />
-
-        </Routes>
-    )
-}
+            <Route path="/MyPosts" element={<MyPosts />} />
+    </Routes>
+  );
+};
 
 /*
     <Route path="INSERT PROFILE PATH HERE" element={<INSERT ELEMENT HERE />} />
