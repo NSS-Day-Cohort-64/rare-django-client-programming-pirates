@@ -12,3 +12,10 @@ export const getTheCategories = async () => {
 
   return categories;
 };
+
+export const getAllTags = async () => {
+  const response = await fetch(`http://localhost:8088/tags`);
+  const tags = await response.json();
+
+  return tags;
+}
