@@ -51,6 +51,9 @@ export const NavBar = ({ token, setToken, setIsAdmin }) => {
               <Link to="/categoryManager" className="navbar-item">
                 Categories
               </Link>
+              <Link to="/tagManager" className="navbar-item">
+                Tags
+              </Link>
             </>
           ) : (
             ""
