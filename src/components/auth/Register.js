@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { registerUser } from "../../managers/AuthManager"
 
-export const Register = ({setToken, setIsAdmin}) => {
+export const Register = ({ setToken, setIsAdmin }) => {
   const firstName = useRef()
   const lastName = useRef()
   const email = useRef()
@@ -16,7 +16,7 @@ export const Register = ({setToken, setIsAdmin}) => {
 
   const handleRegister = (e) => {
     e.preventDefault()
-    
+
     if (password.current.value === verifyPassword.current.value) {
       const newUser = {
         username: username.current.value,
@@ -24,11 +24,13 @@ export const Register = ({setToken, setIsAdmin}) => {
         last_name: lastName.current.value,
         email: email.current.value,
         password: password.current.value,
-        bio: bio.current.value
+        bio: bio.current.value,
+        is_admin: 0
       }
 
       registerUser(newUser)
-        .then(res => {
+        .then(response => {
+          const res = JSON.parse(response)
           if ("valid" in res && res.valid) {
             setToken(res.token)
             navigate("/")
@@ -42,7 +44,7 @@ export const Register = ({setToken, setIsAdmin}) => {
   return (
     <section className="columns is-centered">
       <form className="column is-two-thirds" onSubmit={handleRegister}>
-      <h1 className="title">Rare Publishing</h1>
+        <h1 className="title">Rare Publishing</h1>
         <p className="subtitle">Create an account</p>
         <div className="field">
           <label className="label">First Name</label>
