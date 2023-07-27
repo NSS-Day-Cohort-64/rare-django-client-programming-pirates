@@ -8,15 +8,16 @@ export const TagManagerAndCreator = () => {
     const [newTag, setNewTag] = useState({ label: "" });
     const navigate = useNavigate();
 
+    const fetchTags = async () => {
+        try {
+            const importedTags = await getAllTags();
+            setTags(importedTags);
+        } catch (error) {
+            console.error("Error fetching tags:", error);
+        }
+    };
+    
     useEffect(() => {
-        const fetchTags = async () => {
-            try {
-                const importedTags = await getAllTags();
-                setTags(importedTags);
-            } catch (error) {
-                console.error("Error fetching tags:", error);
-            }
-        };
 
         fetchTags();
     }, []);
@@ -37,7 +38,7 @@ export const TagManagerAndCreator = () => {
         });
 
         await response.json();
-        navigate("/tags");
+        fetchTags();
     };
 
     return (
