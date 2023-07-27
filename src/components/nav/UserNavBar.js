@@ -45,7 +45,7 @@ export const UserNavBar = ({ token, setToken, isAdmin, setIsAdmin }) => {
         <div className="navbar-start">
           {token ? (
             <>
-              <Link to="/" className="navbar-item">
+              <Link to="/posts/UserPosts/UserAllPosts" className="navbar-item">
                 Posts
               </Link>
 
@@ -90,42 +90,9 @@ export const UserNavBar = ({ token, setToken, isAdmin, setIsAdmin }) => {
                 </>
               )}
             </div>
-
-            <div className="navbar-menu" ref={navbar}>
-                <div className="navbar-start">
-                    {
-                        token
-                            ?
-                            <>
-                                <Link to="/posts/UserPosts/UserAllPosts" className="navbar-item">Posts</Link>
-                                <Link to="/tagManager" className="navbar-item">Tag Manager</Link>
-                            </>
-                            :
-                            ""
-                    }
-                </div>
-
-                <div className="navbar-end">
-                    <div className="navbar-item">
-                        <div className="buttons">
-                            {
-                                token
-                                    ?
-                                    <button className="button is-outlined" onClick={() => {
-                                        setToken('')
-                                        setIsAdmin(0)
-                                        navigate('/login')
-                                    }}>Logout</button>
-                                    :
-                                    <>
-                                        <Link to="/register" className="button is-link">Register</Link>
-                                        <Link to="/login" className="button is-outlined">Login</Link>
-                                    </>
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    )
-}
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+};

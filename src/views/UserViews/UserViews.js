@@ -4,6 +4,7 @@ import { UserPostsList } from "../../components/posts/UserPosts/UserAllPosts"
 import { UserSelectedPostDetails } from "../../components/posts/UserPosts/UserPostDetails"
 import { CategoryList } from "../../managers/CategoryManager"
 import { TagManagerAndCreator } from "../../UserTags/TagManager.js"
+import { MyPosts } from "../../components/posts/UserPosts/UserMyPosts"
 
 
 export const UserViews = () => {
