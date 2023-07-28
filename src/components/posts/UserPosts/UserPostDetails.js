@@ -20,8 +20,8 @@ export const UserSelectedPostDetails = () => {
     return (
         <div>
             <h1>Post Details</h1>
-                <ul>
-                <article className = "post">
+            <ul>
+                <article className="post-card">
                     {selectedPost.map((post) => (
                         <li key={post.id}>
                             <h3>{post.title}</h3>
@@ -32,7 +32,7 @@ export const UserSelectedPostDetails = () => {
                         </li>
                     ))}
                 </article>
-                </ul>
+            </ul>
         </div>
-    )
-}
+    );
+};
