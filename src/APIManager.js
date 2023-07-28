@@ -20,14 +20,12 @@ export const getAllTags = async () => {
   return tags;
 }
 
-<<<<<<< HEAD
 export const getAllUsers = async () => {
   const response = await fetch(`http://localhost:8088/users`);
   const users = await response.json();
 
   return users;
 }
-=======
 export const createNewPost = async (post) => {
   const response = await fetch("http://localhost:8088/posts", {
     method: "POST",
@@ -39,4 +37,3 @@ export const createNewPost = async (post) => {
   const newPost = await response.json()
   return newPost
 }
->>>>>>> f410599777ce7292b809c98b63e0df29fad0a348
