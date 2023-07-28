@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getAllUsers } from "../APIManager.js";
 import "./AdminUserListManager.css";
+import { Link } from "react-router-dom";
 
 export const UserListManager = () => {
     const [users, setUsers] = useState([]);
@@ -97,7 +98,11 @@ export const UserListManager = () => {
                         <div className="user-container">
                             <div className="user-info">
                                 <p>
+<<<<<<< HEAD
                                     Username: ({user.first_name} {user.last_name})
+=======
+                                    {user.username}: <Link to={`/Profile/${user.id}`}>{user.first_name} {user.last_name}</Link> {user.email}
+>>>>>>> 3f1ab48d6f4ce5cbc9c1dc66a47257163b5549ce
                                 </p>
                                 </div>
                                 <p>Active:</p>
