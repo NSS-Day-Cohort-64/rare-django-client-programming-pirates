@@ -40,13 +40,6 @@ export const UserNavBar = ({ token, setToken, isAdmin, setIsAdmin }) => {
                     <span aria-hidden="true"></span>
                 </a>
             </div>
-<<<<<<< HEAD
-          </div>
-        </div>
-      </div>
-    </nav>
-  );
-=======
 
             <div className="navbar-menu" ref={navbar}>
                 <div className="navbar-start">
@@ -93,5 +86,4 @@ export const UserNavBar = ({ token, setToken, isAdmin, setIsAdmin }) => {
             </div>
         </nav>
     );
->>>>>>> f410599777ce7292b809c98b63e0df29fad0a348
 };
