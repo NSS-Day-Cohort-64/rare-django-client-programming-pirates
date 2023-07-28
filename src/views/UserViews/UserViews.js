@@ -6,6 +6,7 @@ import { CategoryList } from "../../managers/CategoryManager"
 import { TagManagerAndCreator } from "../../UserTags/TagManager.js"
 import { UserMyPosts } from "../../components/posts/UserPosts/UserMyPosts"
 import { CreateNewUserPost } from "../../components/posts/UserPosts/UserNewPosts"
+import { EditUserPost } from "../../components/posts/UserPosts/UserEditPost"
 
 
 export const UserViews = () => {
@@ -17,8 +18,9 @@ export const UserViews = () => {
             <Route path="/posts/UserPosts/UserAllPosts/UserPostDetails/:postId" element={<UserSelectedPostDetails />} />
             <Route path="/posts/UserPosts/UserMyPosts" element={<UserMyPosts />} />
             <Route path="/posts/UserPosts/NewUserPost" element={<CreateNewUserPost />} />
-        </Routes>
-    );
+            <Route path="/posts/UserPosts/UserEditPost/:postId" element={<EditUserPost />} />
+    </Routes>
+  );
 };
 
 /*
