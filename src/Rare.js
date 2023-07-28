@@ -6,7 +6,7 @@ import { getUser } from "./APIManager"
 
 export const Rare = () => {
   const [token, setTokenState] = useState(localStorage.getItem('auth_token'))
-  const [isAdmin, setIsAdminState] = useState(localStorage.getItem('admin'))
+  const [isAdmin, setIsAdminState] = useState(parseInt(localStorage.getItem('admin')))
 
   const setToken = (newToken) => {
     localStorage.setItem('auth_token', newToken)
@@ -14,7 +14,7 @@ export const Rare = () => {
   }
 
   const setIsAdmin = async (id) => {
-    if(id != 0) {
+    if(id !== '') {
       const user = await getUser(id)
       const newAdmin = user.is_admin
       localStorage.setItem("admin", newAdmin)

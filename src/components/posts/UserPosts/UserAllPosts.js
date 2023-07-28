@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "./myPosts.css";
 
 export const UserPostsList = () => {
     const [posts, setPosts] = useState([]);
@@ -18,9 +19,9 @@ export const UserPostsList = () => {
 
     return (
         <div>
-            <h1>All Posts</h1>
+            <h1 className="post-title">All Posts</h1>
             <ul>
-                <article className="post">
+                <article className="post-card">
                     {posts.map((post) => (
                         <li key={post.id}>
                             <Link to={`UserPostDetails/${post.id}`}>
