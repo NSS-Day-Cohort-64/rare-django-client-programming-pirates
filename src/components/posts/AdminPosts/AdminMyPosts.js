@@ -75,7 +75,7 @@ export const AdminMyPosts = () => {
                 Reactions: {reactionCount.length}
               </p>
               <p className="post-category">Category: {post.category.label}</p>
-              <button onClick={() => navigate("/posts/AdminPosts/AdminEditPost")}> Edit </button>
+              <button onClick={() => navigate(`/posts/AdminPosts/AdminEditPost/${post.id}`)}> Edit </button>
               <button onClick={() => handleConfirmDelete(post)}>
                 {" "}
                 Delete{" "}

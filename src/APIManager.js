@@ -44,6 +44,4 @@ export const editPost = async (post) => {
     },
     body: JSON.stringify(post)
   })
-  const editedPost = await response.json()
-  return editedPost
 }

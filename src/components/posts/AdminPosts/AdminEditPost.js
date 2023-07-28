@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { editPost, getAllTags, getPost, getTheCategories } from "../../../APIManager"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 export const EditAdminPost = () => {
 
@@ -8,6 +8,7 @@ export const EditAdminPost = () => {
     const navigate = useNavigate()
 
     const userId = localStorage.getItem("auth_token")
+    const { postId } = useParams()
 
     const [post, update] = useState({
         user_id: parseInt(userId),
@@ -46,7 +47,19 @@ export const EditAdminPost = () => {
 
     useEffect(
         () => {
-            getPost()
+            getPost(postId)
+                .then((postToEdit) => {
+                    const copy = { ...post }
+                    copy.id = parseInt(postId);
+                    copy.user_id = postToEdit.user_id;
+                    copy.category_id = postToEdit.category_id;
+                    copy.title = postToEdit.title;
+                    copy.publication_date = postToEdit.publication_date;
+                    copy.image_url = postToEdit.image_url;
+                    copy.content = postToEdit.content;
+                    copy.approved = postToEdit.approved
+                    update(copy)
+                })
         },
         []
     )
@@ -69,8 +82,8 @@ export const EditAdminPost = () => {
     const handleSaveButtonClick = async (event) => {
         event.preventDefault()
 
-        const createdPost = await editPost(post)
-        navigate(`/posts/AdminPosts/AdminAllPosts/AdminPostDetails/${createdPost.id}`)
+        await editPost(post)
+        navigate(`/posts/AdminPosts/AdminAllPosts/AdminPostDetails/${postId}`)
     }
 
     return (
@@ -122,6 +135,7 @@ export const EditAdminPost = () => {
                     </fieldset>
                     <fieldset className="field">
                         <select
+                            value={post.category_id}
                             onChange={
                                 (evt) => {
                                     const copy = { ...post }

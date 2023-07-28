@@ -18,7 +18,7 @@ export const AdminViews = () => {
             <Route path="/posts/AdminPosts/AdminAllPosts/AdminPostDetails/:postId" element={ <AdminSelectedPostDetails/>} />
             <Route path="/posts/AdminPosts/AdminMyPosts" element={<AdminMyPosts />} />
             <Route path="/posts/AdminPosts/AdminNewPost" element={<CreateNewAdminPost />} />
-            <Route path="/posts/AdminPosts/AdminEditPost" element={<EditAdminPost />} />
+            <Route path="/posts/AdminPosts/AdminEditPost/:postId" element={<EditAdminPost />} />
         </Routes>
     )
 }
