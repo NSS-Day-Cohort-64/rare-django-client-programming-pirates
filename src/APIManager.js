@@ -1,5 +1,3 @@
-import { HumanDate } from "./components/utils/HumanDate";
-
 export const getUser = async (id) => {
   const response = await fetch(`http://localhost:8088/users/${id}`);
   const users = await response.json();
@@ -30,4 +28,22 @@ export const createNewPost = async (post) => {
   })
   const newPost = await response.json()
   return newPost
+}
+
+export const getPost = async (id) => {
+  const response = await fetch(`http://localhost:8088/posts/${id}`)
+  const postToEdit = await response.json()
+  return postToEdit
+}
+
+export const editPost = async (post) => {
+  const response = await fetch(`http://localhost:8088/posts/${post.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(post)
+  })
+  const editedPost = await response.json()
+  return editedPost
 }

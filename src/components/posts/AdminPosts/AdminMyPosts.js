@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./myPosts.css";
+import { useNavigate } from "react-router-dom";
 
 export const AdminMyPosts = () => {
   const [posts, updatePosts] = useState([]);
@@ -11,6 +12,7 @@ export const AdminMyPosts = () => {
 
   const rareUserId = localStorage.getItem("auth_token");
   const rareUser = JSON.parse(rareUserId);
+  const navigate = useNavigate()
 
   const fetchedPosts = () => {
     fetch(`http://localhost:8088/posts`)
@@ -73,7 +75,7 @@ export const AdminMyPosts = () => {
                 Reactions: {reactionCount.length}
               </p>
               <p className="post-category">Category: {post.category.label}</p>
-              <button> Edit </button>
+              <button onClick={() => navigate("/posts/AdminPosts/AdminEditPost")}> Edit </button>
               <button onClick={() => handleConfirmDelete(post)}>
                 {" "}
                 Delete{" "}
