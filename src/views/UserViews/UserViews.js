@@ -4,7 +4,7 @@ import { UserPostsList } from "../../components/posts/UserPosts/UserAllPosts"
 import { UserSelectedPostDetails } from "../../components/posts/UserPosts/UserPostDetails"
 import { CategoryList } from "../../managers/CategoryManager"
 import { TagManagerAndCreator } from "../../UserTags/TagManager.js"
-import { MyPosts } from "../../components/posts/UserPosts/UserMyPosts"
+import { UserMyPosts } from "../../components/posts/UserPosts/UserMyPosts"
 import { CreateNewUserPost } from "../../components/posts/UserPosts/UserNewPosts"
 
 
@@ -15,8 +15,8 @@ export const UserViews = () => {
             <Route path="/categoryManager" element={<CategoryList />} />
             <Route path="/tagManager" element={<TagManagerAndCreator />} />
             <Route path="/posts/UserPosts/UserAllPosts/UserPostDetails/:postId" element={ <UserSelectedPostDetails />} />
-            <Route path="/MyPosts" element={<MyPosts />} />
-            <Route path="/newPost" element={<CreateNewUserPost />} />
+            <Route path="/posts/UserPosts/UserMyPosts" element={<UserMyPosts />} />
+            <Route path="/posts/UserPosts/NewUserPost" element={<CreateNewUserPost />} />
     </Routes>
   );
 };

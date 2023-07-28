@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./myPosts.css";
 
-export const MyPosts = () => {
+export const UserMyPosts = () => {
   const [posts, updatePosts] = useState([]);
   const [postReactions, updatePostReactions] = useState([]);
   const [modalsVisible, setModalsVisible] = useState({

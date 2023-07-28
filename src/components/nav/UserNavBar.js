@@ -48,8 +48,8 @@ export const UserNavBar = ({ token, setToken, isAdmin, setIsAdmin }) => {
                             <Link to="/posts/UserPosts/UserAllPosts" className="navbar-item">Posts</Link>
                             <Link to="/categoryManager" className="navbar-item">Category Manager</Link>
                             <Link to="/tagManager" className="navbar-item">Tag Manager</Link>
-                            <Link to="/newPost" className="navbar-item">New Post</Link>
-                            <Link to="/MyPosts" className="navbar-item">MyPosts</Link>
+                            <Link to="/posts/UserPosts/NewUserPost" className="navbar-item">New Post</Link>
+                            <Link to="/posts/UserPosts/UserMyPosts" className="navbar-item">MyPosts</Link>
                         </>
                     ) : (
                         ""
