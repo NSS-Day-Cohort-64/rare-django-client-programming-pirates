@@ -51,3 +51,9 @@ export const editPost = async (post) => {
     body: JSON.stringify(post)
   })
 }
+
+export const getSubscriptions = async () => {
+  const response = await fetch(`http://localhost:8088/subscriptions/`);
+  const subscriptions = await response.json();
+  return subscriptions
+}
