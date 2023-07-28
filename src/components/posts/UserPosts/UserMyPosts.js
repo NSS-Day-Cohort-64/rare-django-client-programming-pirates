@@ -68,7 +68,7 @@ export const MyPosts = () => {
                   alt="Post Image"
                 />
               )}
-              <p className="post-author">Author: {post.user_id}</p>
+              <p className="post-author">Author: {post.user.first_name} {post.user.last_name}</p>
               <p className="post-reaction-count">
                 Reactions: {reactionCount.length}
               </p>
