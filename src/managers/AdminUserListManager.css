@@ -1,0 +1,57 @@
+/* AdminUserListManager.css */
+.user-list-container {
+  /* Your styles for the container here */
+}
+
+.title {
+  /* Your styles for the title here */
+}
+
+.user-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: fit-content;
+}
+
+.user-item {
+  /* Your styles for each user item here */
+}
+
+.user-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  border-right: 1px solid #ccc;
+  padding-right: 10px;
+  margin-right: 10px;
+  margin: 0;
+  margin-right: 10px;
+}
+
+.active-checkbox {
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+  margin-right: 10px;
+}
+
+.admin-buttons {
+  display: flex;
+  align-items: center;
+  border-left: 1px solid #ccc; /* New border-left for admin buttons */
+  padding-left: 10px; /* Add some padding to the left of the admin buttons */
+  margin-left: 10px; /* Add some margin to the left of the admin buttons */
+}
+
+.admin-buttons label {
+  margin-right: 10px;
+}
