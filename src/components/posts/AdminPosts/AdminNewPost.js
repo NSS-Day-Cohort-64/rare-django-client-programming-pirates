@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react"
-import { getTheCategories } from "../../../APIManager"
+import { createNewPost, getAllTags, getTheCategories } from "../../../APIManager"
+import { useNavigate } from "react-router-dom"
 
-export const CreateNewPost = () => {
+export const CreateNewAdminPost = () => {
+
+    // This declares navigate as an invocation of useNavigate
+    const navigate = useNavigate()
 
     const userId = localStorage.getItem("auth_token")
 
     const [post, update] = useState({
-        user_id: userId,
+        user_id: parseInt(userId),
         category_id: 0,
         title: "",
         publication_date: 0,
@@ -15,7 +19,10 @@ export const CreateNewPost = () => {
         approved: 1
     })
 
+    const [postTags, updatePostTags] = useState([])
+
     const [allCategories, setCategories] = useState([])
+    const [allTags, setTags] = useState([])
 
     useEffect(
         () => {
@@ -26,6 +33,38 @@ export const CreateNewPost = () => {
         },
         []
     )
+
+    useEffect(
+        () => {
+            getAllTags()
+                .then((tags) => {
+                    setTags(tags)
+                })
+        },
+        []
+    )
+
+    useEffect(
+        () => {
+            getCurrentDate()
+        },
+        []
+    )
+
+    const getCurrentDate = () => {
+        const currentDate = new Date()
+        const formattedDate = currentDate.toDateString().substring(4)
+        const copy = { ...post }
+        copy.publication_date = formattedDate
+        update(copy)
+    }
+
+    const handleSaveButtonClick = async (event) => {
+        event.preventDefault()
+
+        const createdPost = await createNewPost(post)
+        navigate(`/posts/AdminPosts/AdminAllPosts/AdminPostDetails/${createdPost.id}`)
+    }
 
     return (
         <>
@@ -94,24 +133,25 @@ export const CreateNewPost = () => {
                         </select>
                     </fieldset>
                     <fieldset className="field">
-                        <select
-                            onChange={
-                                (evt) => {
-                                    const copy = { ...post }
-                                    copy.category_id = evt.target.value
-                                    update(copy)
-                                }
-                            }>
-                            <option value="0">Category Select</option>
-                            {allCategories.map((category) => (
-                                <option
-                                    key={category.id}
-                                    value={category.id}>
-                                    {category.label}
-                                </option>
-                            ))}
-                        </select>
+                        {allTags.map((tag) => (
+                            <div key={tag.id}>
+                                <label className="checkbox" htmlFor="Tags">{tag.label}</label>
+                                <input
+                                    type="checkbox"
+                                    name={tag.label}
+                                    value={tag.id}
+                                    onChange={
+                                        (evt) => {
+                                            // Assigning tags is a separate ticket so this is currently incomplete
+                                            const copy = { ...postTags }
+                                            copy.tag = evt.target.value
+                                            updatePostTags(copy)
+                                        }
+                                    } />
+                            </div>
+                        ))}
                     </fieldset>
+                    <button onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}>Publish</button>
                 </form>
             </main>
         </>

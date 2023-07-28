@@ -14,7 +14,7 @@ export const ApplicationViews = ({ token, setToken, isAdmin, setIsAdmin }) => {
       <Route path="/login" element={<Login setToken={setToken} setIsAdmin={setIsAdmin} />} />
       <Route path="/register" element={<Register setToken={setToken} setIsAdmin={setIsAdmin} />} />
       <Route element={<Authorized token={token} />}>
-        {isAdmin != 0 ? (
+        {isAdmin !== 0 ? (
           <Route path="*" element={<AdminViews />} />
         ) : (
           <Route path="*" element={<UserViews />} />

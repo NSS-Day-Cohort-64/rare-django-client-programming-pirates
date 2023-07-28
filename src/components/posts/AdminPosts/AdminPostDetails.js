@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "./myPosts.css";
 
 export const AdminSelectedPostDetails = () => {
     const { postId } = useParams();
@@ -7,21 +8,21 @@ export const AdminSelectedPostDetails = () => {
 
     const getPosts = () => {
         fetch(`http://localhost:8088/posts/${postId}`)
-            .then(response => response.json())
+            .then((response) => response.json())
             .then((postArray) => {
-                setSelectedPost([postArray])
-            })
-    }
+                setSelectedPost([postArray]);
+            });
+    };
 
     useEffect(() => {
-        getPosts()
+        getPosts();
     }, []);
 
     return (
         <div>
             <h1>Post Details</h1>
-                <ul>
-                <article className = "post">
+            <ul>
+                <article className="post-card">
                     {selectedPost.map((post) => (
                         <li key={post.id}>
                             <h3>{post.title}</h3>
@@ -32,7 +33,7 @@ export const AdminSelectedPostDetails = () => {
                         </li>
                     ))}
                 </article>
-                </ul>
+            </ul>
         </div>
-    )
-}
+    );
+};
