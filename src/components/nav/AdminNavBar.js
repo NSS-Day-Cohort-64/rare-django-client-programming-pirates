@@ -39,6 +39,7 @@ export const AdminNavBar = ({ token, setToken, isAdmin, setIsAdmin }) => {
                             <Link to="/tagManager" className="navbar-item">Tag Manager</Link>
                             <Link to="/posts/AdminPosts/AdminNewPost" className="navbar-item">New Post</Link>
                             <Link to="/posts/AdminPosts/AdminMyPosts" className="navbar-item">My Posts</Link>
+                            <Link to="/userListManager" className="navbar-item">User Manager</Link>
                             </>
                             :
                             ""

@@ -14,11 +14,11 @@ export const UserViews = () => {
             <Route path="/posts/UserPosts/UserAllPosts" element={< UserPostsList />} />
             <Route path="/categoryManager" element={<CategoryList />} />
             <Route path="/tagManager" element={<TagManagerAndCreator />} />
-            <Route path="/posts/UserPosts/UserAllPosts/UserPostDetails/:postId" element={ <UserSelectedPostDetails />} />
+            <Route path="/posts/UserPosts/UserAllPosts/UserPostDetails/:postId" element={<UserSelectedPostDetails />} />
             <Route path="/posts/UserPosts/UserMyPosts" element={<UserMyPosts />} />
             <Route path="/posts/UserPosts/NewUserPost" element={<CreateNewUserPost />} />
-    </Routes>
-  );
+        </Routes>
+    );
 };
 
 /*
