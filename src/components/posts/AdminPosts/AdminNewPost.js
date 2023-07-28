@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react"
-import { getAllTags, getTheCategories } from "../../../APIManager"
+import { createNewPost, getAllTags, getTheCategories } from "../../../APIManager"
+import { useNavigate } from "react-router-dom"
 
 export const CreateNewPost = () => {
+
+    // This declares navigate as an invocation of useNavigate
+    const navigate = useNavigate()
 
     const userId = localStorage.getItem("auth_token")
 
@@ -42,6 +46,9 @@ export const CreateNewPost = () => {
 
     const handleSaveButtonClick = async (event) => {
         event.preventDefault()
+
+        await createNewPost(post)
+        navigate("/")
     }
 
     return (
@@ -120,6 +127,7 @@ export const CreateNewPost = () => {
                                     value={tag.id}
                                     onChange={
                                         (evt) => {
+                                            // Assigning tags is a separate ticket so this is currently incomplete
                                             const copy = { ...postTags }
                                             copy.tag = evt.target.value
                                             updatePostTags(copy)

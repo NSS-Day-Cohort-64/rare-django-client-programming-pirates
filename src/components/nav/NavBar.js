@@ -3,7 +3,7 @@ import { AdminNavBar } from "./AdminNavBar";
 import { UserNavBar } from "./UserNavBar";
 
 export const NavBar = ({ token, setToken, isAdmin, setIsAdmin }) => {
-  return isAdmin ? (
+  return isAdmin !== 0 ? (
     <AdminNavBar
       token={token}
       setToken={setToken}

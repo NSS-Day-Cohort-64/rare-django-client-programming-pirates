@@ -53,7 +53,7 @@ export const AdminNavBar = ({ token, setToken, isAdmin, setIsAdmin }) => {
                                     className="button is-outlined"
                                     onClick={() => {
                                         setToken("");
-                                        setIsAdmin(0);
+                                        setIsAdmin('');
                                         navigate("/login");
                                     }}
                                 >
