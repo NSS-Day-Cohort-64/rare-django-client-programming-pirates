@@ -45,7 +45,7 @@ export const UserNavBar = ({ token, setToken, isAdmin, setIsAdmin }) => {
                 <div className="navbar-start">
                     {token ? (
                         <>
-                            <Link to="/" className="navbar-item">Posts</Link>
+                            <Link to="/posts/UserPosts/UserAllPosts" className="navbar-item">Posts</Link>
                             <Link to="/categoryManager" className="navbar-item">Category Manager</Link>
                             <Link to="/tagManager" className="navbar-item">Tag Manager</Link>
                             <Link to="/newPost" className="navbar-item">New Post</Link>

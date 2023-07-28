@@ -3,8 +3,9 @@ import { AdminHome } from "../../components/home/AdminHome"
 import { AdminSelectedPostDetails } from "../../components/posts/AdminPosts/AdminPostDetails"
 import { AdminPostsList } from "../../components/posts/AdminPosts/AdminAllPosts"
 import { CategoryList } from "../../managers/CategoryManager"
-import { CreateNewPost } from "../../components/posts/AdminPosts/AdminNewPost"
+import { CreateNewAdminPost } from "../../components/posts/AdminPosts/AdminNewPost"
 import { TagManagerAndCreator } from "../../ManagerTags/TagManager.js"
+import { MyPosts } from "../../components/posts/UserPosts/UserMyPosts"
 
 
 export const AdminViews = () => {
@@ -12,11 +13,10 @@ export const AdminViews = () => {
         <Routes>
             <Route path="/posts/AdminPosts/AdminAllPosts" element={< AdminPostsList />} />
             <Route path="/categoryManager" element={<CategoryList />} />
-            <Route path="/newPost" element={<CreateNewPost />} />
             <Route path="/tagManager" element={<TagManagerAndCreator />} />
-            <Route path="/posts/AdminPosts/AdminAllPosts" element={ <AdminPostsList />} />
             <Route path="/posts/AdminPosts/AdminAllPosts/AdminPostDetails/:postId" element={ <AdminSelectedPostDetails/>} />
-            <Route path="/newPost" element={<CreateNewPost />} />
+            <Route path="/MyPosts" element={<MyPosts />} />
+            <Route path="/newPost" element={<CreateNewAdminPost />} />
         </Routes>
     )
 }

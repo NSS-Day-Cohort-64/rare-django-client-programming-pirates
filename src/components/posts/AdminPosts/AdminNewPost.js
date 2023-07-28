@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { createNewPost, getAllTags, getTheCategories } from "../../../APIManager"
 import { useNavigate } from "react-router-dom"
 
-export const CreateNewPost = () => {
+export const CreateNewAdminPost = () => {
 
     // This declares navigate as an invocation of useNavigate
     const navigate = useNavigate()
@@ -47,8 +47,8 @@ export const CreateNewPost = () => {
     const handleSaveButtonClick = async (event) => {
         event.preventDefault()
 
-        await createNewPost(post)
-        navigate("/")
+        const createdPost = await createNewPost(post)
+        navigate(`/posts/AdminPosts/AdminAllPosts/AdminPostDetails/${createdPost.id}`)
     }
 
     return (
