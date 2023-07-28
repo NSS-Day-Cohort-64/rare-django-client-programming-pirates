@@ -21,9 +21,9 @@ export const UserListManager = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ active: !active }),
+                body: JSON.stringify({ active: 0}),
             });
-
+            
             if (response.ok) {
                 fetchData();
             } else {
