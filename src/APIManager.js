@@ -51,3 +51,17 @@ export const editPost = async (post) => {
     body: JSON.stringify(post)
   })
 }
+
+//////
+// const PostTagsOnSubmit= async (post_id, tags_id) => {
+//   const response = await fetch(`http://localhost:8088/users/${id}`, {
+//       method: "POST",
+//       headers: {
+//           "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//           post_id: post_id,
+//           tags_id: tags_id
+//       }),
+//   });
+//   await response.json();

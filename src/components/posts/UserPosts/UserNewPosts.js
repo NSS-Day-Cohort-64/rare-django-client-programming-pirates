@@ -19,10 +19,10 @@ export const CreateNewUserPost = () => {
         approved: 1
     })
 
-    const [postTags, updatePostTags] = useState([])
+    const [allTags, setTags] = useState([])
+    const [checkedPostTags, updateCheckedPostTags] = useState([])
 
     const [allCategories, setCategories] = useState([])
-    const [allTags, setTags] = useState([])
 
     useEffect(
         () => {
@@ -30,26 +30,30 @@ export const CreateNewUserPost = () => {
                 .then((categories) => {
                     setCategories(categories)
                 })
-        },
-        []
-    )
 
-    useEffect(
-        () => {
             getAllTags()
                 .then((tags) => {
                     setTags(tags)
                 })
-        },
-        []
-    )
 
-    useEffect(
-        () => {
             getCurrentDate()
         },
         []
     )
+
+    const selectPostTags = (event) => {
+        const tagId = parseInt(event.target.value);
+        const isChecked = event.target.checked;
+
+        if (isChecked) {
+            const selectedTag = allTags.find((tag) => tag.id === tagId);
+            checkedPostTags.push(selectedTag);
+        } else {
+            // Remove the unselected tag object from the checkedPostTags array
+            updateCheckedPostTags((prevCheckedTags) => prevCheckedTags.filter((tag) => tag.id !== tagId));
+        }
+    };
+
 
     const getCurrentDate = () => {
         const currentDate = new Date()
@@ -65,6 +69,7 @@ export const CreateNewUserPost = () => {
         const createdPost = await createNewPost(post)
         navigate(`/posts/UserPosts/UserAllPosts/UserPostDetails/${createdPost.id}`)
     }
+
 
     return (
         <>
@@ -138,16 +143,11 @@ export const CreateNewUserPost = () => {
                                 <label className="checkbox" htmlFor="Tags">{tag.label}</label>
                                 <input
                                     type="checkbox"
+                                    id={tag.id}
                                     name={tag.label}
                                     value={tag.id}
-                                    onChange={
-                                        (evt) => {
-                                            // Assigning tags is a separate ticket so this is currently incomplete
-                                            const copy = { ...postTags }
-                                            copy.tag = evt.target.value
-                                            updatePostTags(copy)
-                                        }
-                                    } />
+                                    onChange={selectPostTags}
+                                />
                             </div>
                         ))}
                     </fieldset>

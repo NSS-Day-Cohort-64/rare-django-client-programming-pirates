@@ -97,7 +97,7 @@ export const UserListManager = () => {
                         <div className="user-container">
                             <div className="user-info">
                                 <p>
-                                    Username: {user.first_name} {user.last_name}
+                                    Username: ({user.first_name} {user.last_name})
                                 </p>
                                 </div>
                                 <p>Active:</p>
