@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getSubscriptions, getUser } from "../APIManager"
+import { createSubscription, deleteSubscription, getSubscriptions, getUser } from "../APIManager"
 import { useParams } from "react-router-dom"
 
 export const Profile = () => {
@@ -31,6 +31,34 @@ export const Profile = () => {
         setFilteredSubscriptions(mySubscriptions)
     }, [subscriptions])
 
+    const getCurrentDate = () => {
+        const currentDate = new Date()
+        const formattedDate = currentDate.toDateString().substring(4)
+        return formattedDate
+    }
+
+    const currentSubscription = filteredSubscriptions.find((subscription) => subscription.author_id === parseInt(userId))
+
+    const subscribe = async () => {
+        const newSubscription = {
+            follower_id: rareUser,
+            author_id: parseInt(userId),
+            created_on: getCurrentDate()
+        }
+        await createSubscription(newSubscription)
+        getSubscriptions().then((allSubscriptions) => {
+            setSubscriptions(allSubscriptions)
+        })
+    }
+
+    const unsubscribe = async () => {
+        await deleteSubscription(currentSubscription.id);
+        const updatedSubscriptions = await getSubscriptions();
+        getSubscriptions().then((allSubscriptions) => {
+            setSubscriptions(allSubscriptions)
+        })
+    }
+
     return (
         <div className="container">
             {user.profile_image_url && (
@@ -47,9 +75,9 @@ export const Profile = () => {
             <p>{user.first_name}</p>
             <p>{user.last_name}</p>
             {
-                filteredSubscriptions.find((subscription) => subscription.author_id === parseInt(userId))
-                ? <button>Unsubscribe</button>
-                : <button>Subscribe</button>
+                currentSubscription
+                    ? <button onClick={() => unsubscribe(currentSubscription.id)}>Unsubscribe</button>
+                    : <button onClick={() => subscribe()}>Subscribe</button>
             }
             <p>{user.bio}</p>
         </div>
