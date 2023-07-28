@@ -1,44 +1,57 @@
-/* style.css */
-
+/* AdminUserListManager.css */
 .user-list-container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .user-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .user-item {
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  label {
-    margin-left: 10px;
-  }
-  
-  /* Style the checkbox */
-  input[type="checkbox"] {
-    margin-right: 5px;
-  }
-  
-  /* Style the label and checkbox together */
-  label input[type="checkbox"] {
-    vertical-align: middle;
-  }
-  
+  /* Your styles for the container here */
+}
+
+.title {
+  /* Your styles for the title here */
+}
+
+.user-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: fit-content;
+}
+
+.user-item {
+  /* Your styles for each user item here */
+}
+
+.user-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  border-right: 1px solid #ccc;
+  padding-right: 10px;
+  margin-right: 10px;
+  margin: 0;
+  margin-right: 10px;
+}
+
+.active-checkbox {
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+  margin-right: 10px;
+}
+
+.admin-buttons {
+  display: flex;
+  align-items: center;
+  border-left: 1px solid #ccc; /* New border-left for admin buttons */
+  padding-left: 10px; /* Add some padding to the left of the admin buttons */
+  margin-left: 10px; /* Add some margin to the left of the admin buttons */
+}
+
+.admin-buttons label {
+  margin-right: 10px;
+}

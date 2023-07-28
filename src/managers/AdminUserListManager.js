@@ -4,6 +4,18 @@ import "./AdminUserListManager.css";
 
 export const UserListManager = () => {
     const [users, setUsers] = useState([]);
+    const [userInfo, setUserInfo] = useState({
+        first_name: "",
+        last_name: "",
+        email: "",
+        bio: "",
+        username: "",
+        password: "",
+        profile_image_url: "",
+        created_on: "",
+        active: "",
+        is_admin: ""
+    });
 
     const fetchData = async () => {
         const importUsers = await getAllUsers();
@@ -14,16 +26,58 @@ export const UserListManager = () => {
         fetchData();
     }, []);
 
-    const handleToggleActive = async (id, active) => {
+    const handleToggleActive = async (id, active, first_name, last_name, email, bio, username, password, profile_image_url, created_on, is_admin) => {
         try {
             const response = await fetch(`http://localhost:8088/users/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ active: 0}),
+                body: JSON.stringify({
+                    first_name: first_name,
+                    last_name: last_name,
+                    email: email,
+                    bio: bio,
+                    username: username,
+                    password: password,
+                    profile_image_url: profile_image_url,
+                    created_on: created_on,
+                    active: !active,
+                    is_admin: is_admin
+                }),
             });
-            
+
+            if (response.ok) {
+                fetchData();
+            } else {
+                console.error("Failed to update user's active status:", response);
+            }
+        } catch (error) {
+            console.error("Error updating user's active status:", error);
+        }
+    };
+
+    const handleToggleAdmin = async (id, active, first_name, last_name, email, bio, username, password, profile_image_url, created_on, is_admin) => {
+        try {
+            const response = await fetch(`http://localhost:8088/users/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    first_name: first_name,
+                    last_name: last_name,
+                    email: email,
+                    bio: bio,
+                    username: username,
+                    password: password,
+                    profile_image_url: profile_image_url,
+                    created_on: created_on,
+                    active: active,
+                    is_admin: !is_admin
+                }),
+            });
+
             if (response.ok) {
                 fetchData();
             } else {
@@ -40,21 +94,88 @@ export const UserListManager = () => {
             <ul className="user-list">
                 {users.map((user) => (
                     <li key={user.id} className="user-item">
-                        <div>
-                            <p>
-                                Username: {user.first_name} {user.last_name}
-                            </p>
-                            <p>Active: {user.active ? "Yes" : "No"}</p>
-                            <input
-                                type="checkbox"
-                                checked={user.active}
-                                onChange={() => handleToggleActive(user.id, user.active)}
-                            />
-                            <p>Admin: {user.is_admin ? "Yes" : "No"}</p>
+                        <div className="user-container">
+                            <div className="user-info">
+                                <p>
+                                    Username: {user.first_name} {user.last_name}
+                                </p>
+                                </div>
+                                <p>Active:</p>
+                                <input
+                                    type="checkbox"
+                                    checked={user.active}
+                                    onChange={() =>
+                                        handleToggleActive(
+                                            user.id,
+                                            user.active,
+                                            user.first_name,
+                                            user.last_name,
+                                            user.email,
+                                            user.bio,
+                                            user.username,
+                                            user.password,
+                                            user.profile_image_url,
+                                            user.created_on,
+                                            user.is_admin
+                                        )
+                                    }
+                                />
+
+                            <div className="admin-buttons">
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name={`role_${user.id}`}
+                                        value="user"
+                                        checked={!user.is_admin}
+                                        onChange={() =>
+                                            handleToggleAdmin(
+                                                user.id,
+                                                user.active,
+                                                user.first_name,
+                                                user.last_name,
+                                                user.email,
+                                                user.bio,
+                                                user.username,
+                                                user.password,
+                                                user.profile_image_url,
+                                                user.created_on,
+                                                user.is_admin
+                                            )
+                                        }
+                                    />
+                                    Author
+                                </label>
+
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name={`role_${user.id}`}
+                                        value="admin"
+                                        checked={user.is_admin}
+                                        onChange={() =>
+                                            handleToggleAdmin(
+                                                user.id,
+                                                user.active,
+                                                user.first_name,
+                                                user.last_name,
+                                                user.email,
+                                                user.bio,
+                                                user.username,
+                                                user.password,
+                                                user.profile_image_url,
+                                                user.created_on,
+                                                user.is_admin
+                                            )
+                                        }
+                                    />
+                                    Admin
+                                </label>
+                            </div>
                         </div>
                     </li>
                 ))}
             </ul>
         </div>
     );
-};
+}
