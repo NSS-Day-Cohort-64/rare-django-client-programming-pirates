@@ -44,6 +44,21 @@ export const CreateNewAdminPost = () => {
         []
     )
 
+    useEffect(
+        () => {
+            getCurrentDate()
+        },
+        []
+    )
+
+    const getCurrentDate = () => {
+        const currentDate = new Date()
+        const formattedDate = currentDate.toDateString().substring(4)
+        const copy = { ...post }
+        copy.publication_date = formattedDate
+        update(copy)
+    }
+
     const handleSaveButtonClick = async (event) => {
         event.preventDefault()
 

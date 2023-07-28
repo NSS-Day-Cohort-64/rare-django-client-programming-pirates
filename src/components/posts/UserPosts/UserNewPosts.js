@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { createNewPost, getAllTags, getTheCategories } from "../../../APIManager"
 import { useNavigate } from "react-router-dom"
-import { HumanDate } from "../../utils/HumanDate"
 
 export const CreateNewUserPost = () => {
 
