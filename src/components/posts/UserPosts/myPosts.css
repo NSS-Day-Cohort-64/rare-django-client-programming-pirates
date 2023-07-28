@@ -1,13 +1,23 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  text-align: center;
+}
+
 .post-card {
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 10px;
+  margin-top: 20px;
   margin-bottom: 20px;
-  position: relative;
-  width: 650px;
-  margin-left: 320px;
-  margin-top: 40px;
+  width: 100%;
 }
 
 .post-title {
@@ -49,13 +59,14 @@
   color: #888;
   margin-bottom: 0;
 }
+
 .your-post-header {
   margin-top: 40px;
   margin-bottom: 20px;
   font-size: 30px;
   font-weight: bold;
-  text-align: center;
 }
+
 .modal {
   display: none;
   position: fixed;
