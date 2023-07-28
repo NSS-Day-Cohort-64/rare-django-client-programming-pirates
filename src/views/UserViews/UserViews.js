@@ -7,6 +7,7 @@ import { TagManagerAndCreator } from "../../UserTags/TagManager.js"
 import { UserMyPosts } from "../../components/posts/UserPosts/UserMyPosts"
 import { CreateNewUserPost } from "../../components/posts/UserPosts/UserNewPosts"
 import { EditUserPost } from "../../components/posts/UserPosts/UserEditPost"
+import { Profile } from "../../profile/Profile"
 
 
 export const UserViews = () => {
@@ -19,6 +20,7 @@ export const UserViews = () => {
             <Route path="/posts/UserPosts/UserMyPosts" element={<UserMyPosts />} />
             <Route path="/posts/UserPosts/NewUserPost" element={<CreateNewUserPost />} />
             <Route path="/posts/UserPosts/UserEditPost/:postId" element={<EditUserPost />} />
+            <Route path="/Profile/:userId" element={<Profile />} />
     </Routes>
   );
 };
