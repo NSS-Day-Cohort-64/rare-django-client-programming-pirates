@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { createSubscription, deleteSubscription, getSubscriptions, getUser } from "../APIManager"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
+
 
 export const Profile = () => {
 
@@ -77,7 +78,7 @@ export const Profile = () => {
             {
                 currentSubscription
                     ? <button onClick={() => unsubscribe(currentSubscription.id)}>Unsubscribe</button>
-                    : <button onClick={() => subscribe()}>Subscribe</button>
+                    : <Link to="/"><button onClick={() => subscribe()}>Subscribe</button></Link>
             }
             <p>{user.bio}</p>
         </div>
