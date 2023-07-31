@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export const UserSelectedPostDetails = () => {
     const { postId } = useParams();
@@ -25,7 +25,7 @@ export const UserSelectedPostDetails = () => {
                     {selectedPost.map((post) => (
                         <li key={post.id}>
                             <h3>{post.title}</h3>
-                            <p>Author: {post.user?.first_name} {post.user?.last_name}</p>
+                            <p>Author: <Link to={`/Profile/${post.user?.id}`}>{post.user?.first_name} {post.user?.last_name}</Link></p>
                             <p>Category: {post.category?.label}</p>
                             <p>Publication date: {post.publication_date}</p>
                             <p>Content: {post.content}</p>
