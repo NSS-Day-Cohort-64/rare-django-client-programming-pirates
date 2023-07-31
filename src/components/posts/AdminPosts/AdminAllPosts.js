@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "./myPosts.css";
 
 export const AdminPostsList = () => {
     const [posts, setPosts] = useState([]);
+    const [users, setUsers] = useState([]);
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedUser, setSelectedUser] = useState(null);
     const [filteredPosts, setFilteredPosts] = useState([]);
 
     const getPosts = () => {
@@ -13,6 +16,14 @@ export const AdminPostsList = () => {
             .then((postArray) => {
                 setPosts(postArray);
                 setFilteredPosts(postArray);
+            });
+    };
+
+    const getUsers = () => {
+        fetch(`http://localhost:8088/users`)
+            .then((response) => response.json())
+            .then((userArray) => {
+                setUsers(userArray);
             });
     };
 
@@ -26,21 +37,37 @@ export const AdminPostsList = () => {
 
     useEffect(() => {
         getPosts();
+        getUsers();
         getCategories();
     }, []);
 
     const handleCategoryChange = (event) => {
         const categoryId = parseInt(event.target.value, 10);
-        setSelectedCategory(categoryId);
-        if (categoryId === 0) {
-            setFilteredPosts(posts);
-        } else {
-            const filteredPostsByCategory = posts.filter(
-                (post) => post.category_id === categoryId
-            );
-            setFilteredPosts(filteredPostsByCategory);
-        }
+        setSelectedCategory(categoryId === 0 ? null : categoryId);
     };
+
+    const handleUserChange = (event) => {
+        const userId = parseInt(event.target.value, 10);
+        setSelectedUser(userId === 0 ? null : userId);
+    };
+
+    useEffect(() => {
+        let filteredPostsArray = [...posts];
+
+        if (selectedCategory !== null) {
+            filteredPostsArray = filteredPostsArray.filter(
+                (post) => post.category_id === selectedCategory
+            );
+        }
+
+        if (selectedUser !== null) {
+            filteredPostsArray = filteredPostsArray.filter(
+                (post) => post.user_id === selectedUser
+            );
+        }
+
+        setFilteredPosts(filteredPostsArray);
+    }, [selectedCategory, selectedUser, posts]);
 
     return (
         <div className="container">
@@ -60,9 +87,27 @@ export const AdminPostsList = () => {
                     ))}
                 </select>
             </div>
+            <div>
+                <label htmlFor="userSelect">Select User:</label>
+                <select
+                    id="userSelect"
+                    onChange={handleUserChange}
+                    value={selectedUser || 0}
+                >
+                    <option value={0}>All Users</option>
+                    {users.map((user) => (
+                        <option key={user.id} value={user.id}>
+                            {user.username}
+                        </option>
+                    ))}
+                </select>
+            </div>
             <ul className="post-list">
                 {filteredPosts.map((post, index) => (
-                    <li key={post.id} className={`post-card ${index === 0 ? "first-post" : ""}`}>
+                    <li
+                        key={post.id}
+                        className={`post-card ${index === 0 ? "first-post" : ""}`}
+                    >
                         <Link to={`AdminPostDetails/${post.id}`}>
                             <h3 className="post-title">{post.title}</h3>
                         </Link>
