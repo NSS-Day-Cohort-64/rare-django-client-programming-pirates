@@ -24,17 +24,6 @@ export const getAllUsers = async () => {
 
   return users;
 }
-// export const createNewPost = async (post, tagArray) => {
-//   const response = await fetch("http://localhost:8088/posts", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json"
-//     },
-//     body: JSON.stringify(post)
-//   })
-//   const newPost = await response.json()
-//   return newPost
-// }
 
 export const createNewPost = async (post, tagArray) => {
   try {
