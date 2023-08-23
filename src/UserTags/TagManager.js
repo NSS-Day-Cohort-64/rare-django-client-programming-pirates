@@ -29,7 +29,7 @@ export const TagManagerAndCreator = () => {
             label: newTag.label,
         };
 
-        const response = await fetch("http://localhost:8088/tags", {
+        const response = await fetch("http://localhost:8000/tags", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

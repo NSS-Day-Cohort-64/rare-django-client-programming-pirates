@@ -6,7 +6,7 @@ export const UserSelectedPostDetails = () => {
     const [selectedPost, setSelectedPost] = useState([]);
 
     const getPosts = () => {
-        fetch(`http://localhost:8088/posts/${postId}`)
+        fetch(`http://localhost:8000/posts/${postId}`)
             .then(response => response.json())
             .then((postArray) => {
                 setSelectedPost([postArray])

@@ -11,7 +11,7 @@ export const AdminPostsList = () => {
     const [filteredPosts, setFilteredPosts] = useState([]);
 
     const getPosts = () => {
-        fetch(`http://localhost:8088/posts`)
+        fetch(`http://localhost:8000/posts`)
             .then((response) => response.json())
             .then((postArray) => {
                 setPosts(postArray);
@@ -20,7 +20,7 @@ export const AdminPostsList = () => {
     };
 
     const getUsers = () => {
-        fetch(`http://localhost:8088/users`)
+        fetch(`http://localhost:8000/users`)
             .then((response) => response.json())
             .then((userArray) => {
                 setUsers(userArray);
@@ -28,7 +28,7 @@ export const AdminPostsList = () => {
     };
 
     const getCategories = () => {
-        fetch(`http://localhost:8088/categories`)
+        fetch(`http://localhost:8000/categories`)
             .then((response) => response.json())
             .then((categoryArray) => {
                 setCategories(categoryArray);

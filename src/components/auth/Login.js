@@ -19,10 +19,10 @@ export const Login = ({ setToken, setIsAdmin }) => {
 
     
     loginUser(user).then(response => {
-      const res = JSON.parse(response)
-      if ("valid" in res && res.valid) {
-        setToken(res.token)
-        setIsAdmin(res.token)
+      // const res = JSON.parse(response)
+      if ("valid" in response && response.valid) {
+        setToken(response.token)
+        setIsAdmin(response.token)
         navigate("/")
       }
       else {

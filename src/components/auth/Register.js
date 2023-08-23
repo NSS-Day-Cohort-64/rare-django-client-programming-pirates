@@ -1,9 +1,9 @@
 import { useRef } from "react"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
-import { registerUser } from "../../managers/AuthManager"
+import { registerUser, loginUser } from "../../managers/AuthManager"
 
-export const Register = ({ setToken, setIsAdmin }) => {
+export const Register = ({ setToken, setIsAdmin, isAdmin }) => {
   const firstName = useRef()
   const lastName = useRef()
   const email = useRef()
@@ -17,7 +17,10 @@ export const Register = ({ setToken, setIsAdmin }) => {
   const handleRegister = (e) => {
     e.preventDefault()
 
+    console.log("handleRegister - Registration form submitted");
+
     if (password.current.value === verifyPassword.current.value) {
+      console.log("Passwords match");
       const newUser = {
         username: username.current.value,
         first_name: firstName.current.value,
@@ -30,13 +33,30 @@ export const Register = ({ setToken, setIsAdmin }) => {
 
       registerUser(newUser)
         .then(response => {
-          const res = JSON.parse(response)
-          if ("valid" in res && res.valid) {
-            setToken(res.token)
-            navigate("/")
+          console.log("Registration response:", response);
+          // const res = JSON.parse(response)
+          if ("valid" in response && response.valid) {
+            console.log("Registration successful");
+            // Register succeeded, now log in the user
+            const loginCredentials = {
+              username: newUser.username,
+              password: newUser.password,
+            };
+
+            loginUser(loginCredentials)
+              .then((loginResponse) => {
+                if ("valid" in loginResponse && loginResponse.valid) {
+                  // Successfully logged in, set token and isAdmin
+                  setToken(loginResponse.token);
+                  setIsAdmin(loginResponse.token);
+                  navigate("*");
+                  console.log("Navigating to", isAdmin !== 0 ? "Admin Home" : "User Home");
+                }
+              });
           }
-        })
+        });
     } else {
+      console.log("Passwords do not match");
       passwordDialog.current.showModal()
     }
   }
