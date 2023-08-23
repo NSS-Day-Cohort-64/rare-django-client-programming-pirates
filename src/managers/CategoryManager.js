@@ -27,7 +27,7 @@ export const CategoryList = () => {
       label: newCategory.label,
     };
 
-    fetch(`http://localhost:8088/categories`, {
+    fetch(`http://localhost:8000/categories`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(categoryToSendToTheApi),

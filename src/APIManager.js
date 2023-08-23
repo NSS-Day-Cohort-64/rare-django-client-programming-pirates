@@ -1,25 +1,25 @@
 export const getUser = async (id) => {
-  const response = await fetch(`http://localhost:8088/users/${id}`);
+  const response = await fetch(`http://localhost:8000/users/${id}`);
   const user = await response.json();
   return user;
 };
 
 export const getTheCategories = async () => {
-  const response = await fetch(`http://localhost:8088/categories`);
+  const response = await fetch(`http://localhost:8000/categories`);
   const categories = await response.json();
 
   return categories;
 };
 
 export const getAllTags = async () => {
-  const response = await fetch(`http://localhost:8088/tags`);
+  const response = await fetch(`http://localhost:8000/tags`);
   const tags = await response.json();
 
   return tags;
 }
 
 export const getAllUsers = async () => {
-  const response = await fetch(`http://localhost:8088/users`);
+  const response = await fetch(`http://localhost:8000/users`);
   const users = await response.json();
 
   return users;
@@ -28,7 +28,7 @@ export const getAllUsers = async () => {
 export const createNewPost = async (post, tagArray) => {
   try {
     // Make the API call to create the post
-    const postResponse = await fetch("http://localhost:8088/posts", {
+    const postResponse = await fetch("http://localhost:8000/posts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +55,7 @@ export const createNewPost = async (post, tagArray) => {
       };
 
       // Make the API call to create the tag post
-      const tagResponse = await fetch("http://localhost:8088/post_tags", {
+      const tagResponse = await fetch("http://localhost:8000/post_tags", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -86,13 +86,13 @@ export const createNewPost = async (post, tagArray) => {
 };
 
 export const getPost = async (id) => {
-  const response = await fetch(`http://localhost:8088/posts/${id}`)
+  const response = await fetch(`http://localhost:8000/posts/${id}`)
   const postToEdit = await response.json()
   return postToEdit
 }
 
 export const editPost = async (post) => {
-  const response = await fetch(`http://localhost:8088/posts/${post.id}`, {
+  const response = await fetch(`http://localhost:8000/posts/${post.id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
@@ -102,13 +102,13 @@ export const editPost = async (post) => {
 }
 
 export const getSubscriptions = async () => {
-  const response = await fetch(`http://localhost:8088/subscriptions`);
+  const response = await fetch(`http://localhost:8000/subscriptions`);
   const subscriptions = await response.json();
   return subscriptions
 }
 
 export const createSubscription = async (newSubscription) => {
-  const response = await fetch("http://localhost:8088/subscriptions", {
+  const response = await fetch("http://localhost:8000/subscriptions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -120,7 +120,7 @@ export const createSubscription = async (newSubscription) => {
 }
 
 export const deleteSubscription = async (id) => {
-  fetch(`http://localhost:8088/subscriptions/${id}`, {
+  fetch(`http://localhost:8000/subscriptions/${id}`, {
     method: "DELETE"
   })
 }

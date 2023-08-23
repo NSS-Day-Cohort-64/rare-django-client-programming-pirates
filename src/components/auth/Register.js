@@ -8,7 +8,6 @@ export const Register = ({ setToken, setIsAdmin }) => {
   const lastName = useRef()
   const email = useRef()
   const username = useRef()
-  const bio = useRef()
   const password = useRef()
   const verifyPassword = useRef()
   const passwordDialog = useRef()
@@ -23,14 +22,11 @@ export const Register = ({ setToken, setIsAdmin }) => {
         first_name: firstName.current.value,
         last_name: lastName.current.value,
         email: email.current.value,
-        password: password.current.value,
-        bio: bio.current.value,
-        is_admin: 0
+        password: password.current.value
       }
 
       registerUser(newUser)
-        .then(response => {
-          const res = JSON.parse(response)
+        .then(res => {
           if ("valid" in res && res.valid) {
             setToken(res.token)
             navigate("/")
@@ -88,13 +84,6 @@ export const Register = ({ setToken, setIsAdmin }) => {
                 <input className="input" type="password" placeholder="Verify Password" ref={verifyPassword} />
               </p>
             </div>
-          </div>
-        </div>
-
-        <div className="field">
-          <label className="label">Bio</label>
-          <div className="control">
-            <textarea className="textarea" placeholder="Tell us about yourself..." ref={bio}></textarea>
           </div>
         </div>
 
