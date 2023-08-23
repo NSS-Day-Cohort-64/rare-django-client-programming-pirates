@@ -17,9 +17,7 @@ export const Login = ({ setToken, setIsAdmin }) => {
       password: password.current.value
     }
 
-    
-    loginUser(user).then(response => {
-      const res = JSON.parse(response)
+    loginUser(user).then(res => {
       if ("valid" in res && res.valid) {
         setToken(res.token)
         setIsAdmin(res.token)

@@ -11,7 +11,7 @@ export const UserPostsList = () => {
     const [filteredPosts, setFilteredPosts] = useState([]);
 
     const getPosts = () => {
-        fetch(`http://localhost:8088/posts`)
+        fetch(`http://localhost:8000/posts`)
             .then((response) => response.json())
             .then((postArray) => {
                 postArray.sort((a, b) => new Date(b.publication_date) - new Date(a.publication_date));
@@ -22,7 +22,7 @@ export const UserPostsList = () => {
     
 
     const getUsers = () => {
-        fetch(`http://localhost:8088/users`)
+        fetch(`http://localhost:8000/users`)
             .then((response) => response.json())
             .then((userArray) => {
                 setUsers(userArray);
@@ -30,7 +30,7 @@ export const UserPostsList = () => {
     };
 
     const getCategories = () => {
-        fetch(`http://localhost:8088/categories`)
+        fetch(`http://localhost:8000/categories`)
             .then((response) => response.json())
             .then((categoryArray) => {
                 setCategories(categoryArray);
