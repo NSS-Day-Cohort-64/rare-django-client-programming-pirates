@@ -15,7 +15,7 @@ export const AdminMyPosts = () => {
   const navigate = useNavigate()
 
   const fetchedPosts = () => {
-    fetch(`http://localhost:8088/posts`)
+    fetch(`http://localhost:8000/posts`)
       .then((response) => response.json())
       .then((postData) => {
         updatePosts(postData);
@@ -27,7 +27,7 @@ export const AdminMyPosts = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:8088/post_reactions`)
+    fetch(`http://localhost:8000/post_reactions`)
       .then((response) => response.json())
       .then((postReactionData) => {
         updatePostReactions(postReactionData);
@@ -40,7 +40,7 @@ export const AdminMyPosts = () => {
   };
 
   const handleDelete = () => {
-    fetch(`http://localhost:8088/posts/${selectedPost.id}`, {
+    fetch(`http://localhost:8000/posts/${selectedPost.id}`, {
       method: "DELETE",
     }).then(() => {
       fetchedPosts();
