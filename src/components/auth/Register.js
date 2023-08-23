@@ -29,7 +29,7 @@ export const Register = ({ setToken, setIsAdmin }) => {
         .then(res => {
           if ("valid" in res && res.valid) {
             setToken(res.token)
-            navigate("/")
+            navigate("/posts/UserPosts/UserAllPosts")
           }
         })
     } else {
