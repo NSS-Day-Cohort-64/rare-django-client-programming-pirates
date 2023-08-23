@@ -31,7 +31,7 @@ export const UserListManager = () => {
 
     const handleToggleActive = async (id, active, first_name, last_name, email, bio, username, password, profile_image_url, created_on, is_admin) => {
         try {
-            const response = await fetch(`http://localhost:8088/users/${id}`, {
+            const response = await fetch(`http://localhost:8000/users/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -62,7 +62,7 @@ export const UserListManager = () => {
 
     const handleToggleAdmin = async (id, active, first_name, last_name, email, bio, username, password, profile_image_url, created_on, is_admin) => {
         try {
-            const response = await fetch(`http://localhost:8088/users/${id}`, {
+            const response = await fetch(`http://localhost:8000/users/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
