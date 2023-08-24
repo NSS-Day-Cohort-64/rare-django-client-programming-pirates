@@ -33,6 +33,7 @@ export const TagManagerAndCreator = () => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": ` Token ${localStorage.getItem("auth_token")}`
             },
             body: JSON.stringify(tagToSendToAPI),
         });
