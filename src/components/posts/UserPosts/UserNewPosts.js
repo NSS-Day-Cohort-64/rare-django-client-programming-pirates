@@ -14,7 +14,6 @@ export const CreateNewUserPost = () => {
         content: ""
     });
 
-    const [allTags, setTags] = useState([]);
     const [checkedPostTags, updateCheckedPostTags] = useState([]);
     const [allCategories, setCategories] = useState([]);
 
@@ -22,65 +21,18 @@ export const CreateNewUserPost = () => {
         getTheCategories().then((categories) => {
             setCategories(categories);
         });
-
-        getAllTags().then((tags) => {
-            // Add the isChecked property to each tag
-            const tagsWithIsChecked = tags.map((tag) => ({
-                ...tag,
-                isChecked: false,
-            }));
-            setTags(tagsWithIsChecked);
-        });
-
-        getCurrentDate();
     }, []);
 
-    const selectPostTags = (event) => {
-        const tagId = parseInt(event.target.value);
-        const isChecked = event.target.checked;
-
-
-        setTags((prevTags) =>
-            prevTags.map((tag) =>
-                tag.id === tagId ? { ...tag, isChecked: isChecked } : tag
-            )
-        );
-
-
-        if (isChecked) {
-            const selectedTag = allTags.find((tag) => tag.id === tagId);
-            selectedTag.isChecked = true;
-            updateCheckedPostTags((prevTags) => [...prevTags, selectedTag]);
-        } else {
-            updateCheckedPostTags((prevTags) =>
-                prevTags.filter((tag) => tag.id !== tagId)
-            );
-        }
-    };
-
-
-    const getCurrentDate = () => {
-        const currentDate = new Date();
-        const formattedDate = currentDate.toDateString().substring(4);
-        const copy = { ...post };
-        copy.publication_date = formattedDate;
-        update(copy);
-    };
 
     const handleSaveButtonClick = async (event) => {
         event.preventDefault();
 
-        // Get the IDs of the selected tags
-        const selectedTagIds = allTags
-            .filter((tag) => tag.isChecked)
-            .map((tag) => tag.id);
-
         // Update the post object with the selectedTagIds before saving
         const finishedPost = { ...post };
-        const tagArray = checkedPostTags
 
-        const createdPost = await createNewPost(finishedPost, tagArray);
-        navigate(`/posts/UserPosts/UserAllPosts/UserPostDetails/${createdPost.id}`);
+
+        const createdPost = await createNewPost(finishedPost);
+        navigate(`/posts/UserPosts/UserAllPosts`);
     };
 
     return (
@@ -143,23 +95,7 @@ export const CreateNewUserPost = () => {
                             ))}
                         </select>
                     </fieldset>
-                    <fieldset className="field">
-                        {allTags.map((tag) => (
-                            <div key={tag.id}>
-                                <label className="checkbox" htmlFor="Tags">
-                                    {tag.label}
-                                </label>
-                                <input
-                                    type="checkbox"
-                                    id={tag.id}
-                                    name={tag.label}
-                                    value={tag.id}
-                                    checked={tag.isChecked}
-                                    onChange={selectPostTags}
-                                />
-                            </div>
-                        ))}
-                    </fieldset>
+                    
                     <button onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}>
                         Publish
                     </button>
