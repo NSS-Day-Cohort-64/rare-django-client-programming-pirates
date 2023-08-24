@@ -5,7 +5,11 @@ export const getUser = async (id) => {
 };
 
 export const getTheCategories = async () => {
-  const response = await fetch(`http://localhost:8000/categories`);
+  const response = await fetch(`http://localhost:8000/categories`, {
+    headers: {
+      "Authorization": `Token ${localStorage.getItem("auth_token")}`
+      }
+      });
   const categories = await response.json();
 
   return categories;
