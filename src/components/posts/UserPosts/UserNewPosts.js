@@ -6,16 +6,12 @@ import { useNavigate } from "react-router-dom";
 export const CreateNewUserPost = () => {
     const navigate = useNavigate();
 
-    const userId = localStorage.getItem("auth_token");
-
     const [post, update] = useState({
-        user_id: parseInt(userId),
+
         category_id: 0,
         title: "",
-        publication_date: 0,
         image_url: "",
-        content: "",
-        approved: 1,
+        content: ""
     });
 
     const [allTags, setTags] = useState([]);
