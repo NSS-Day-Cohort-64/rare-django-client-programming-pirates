@@ -29,7 +29,7 @@ export const CategoryList = () => {
 
     fetch(`http://localhost:8000/categories`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Authorization": `Token ${localStorage.getItem("auth_token")}` },
       body: JSON.stringify(categoryToSendToTheApi),
     })
       .then((response) => response.json())
@@ -37,10 +37,6 @@ export const CategoryList = () => {
         fetchCategories();
       });
   };
-
-  const sortedCategories = categories.sort((a, b) =>
-    a.label.localeCompare(b.label)
-  );
 
   const handleEditClick = (category) => {
     setSelectedCategory(category);
@@ -71,7 +67,7 @@ export const CategoryList = () => {
       <h2 className="category-title"> Categories </h2>
 
       <div className="category-list-container">
-        {sortedCategories.map((category) => (
+        {categories.map((category) => (
           <section className="category-profile" key={category.id}>
             <a href="#" onClick={() => handleEditClick(category)}>
               {category.label}
