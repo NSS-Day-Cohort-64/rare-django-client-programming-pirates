@@ -107,6 +107,10 @@ export const CategoryList = () => {
     setModalsVisible({ ...modalsVisible, deleteModalVisible: false });
   };
 
+  useEffect(() => {
+    fetchCategories(); // Call the function without any parameters for initial load
+  }, []);
+
   return (
     <>
       <h2 className="category-title"> Categories </h2>
