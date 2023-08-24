@@ -34,13 +34,14 @@ export const getAllUsers = async () => {
   return users;
 }
 
-export const createNewPost = async (post, tagArray) => {
+export const createNewPost = async (post) => {
   try {
     // Make the API call to create the post
     const postResponse = await fetch("http://localhost:8000/posts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Token ${localStorage.getItem("auth_token")}`
       },
       body: JSON.stringify(post),
     });
@@ -51,42 +52,6 @@ export const createNewPost = async (post, tagArray) => {
 
     // Get the new post object from the response
     const newPost = await postResponse.json();
-
-    // Retrieve the post_id from the newPost object
-    const postId = newPost.id;
-
-    // Create an array of promises for tag post requests
-    const tagPostPromises = tagArray.map(async (tag) => {
-      // Modify the tag object to associate it with the post using the postId
-      const tagPost = {
-        post_id: postId,
-        tag_id: tag.id
-      };
-
-      // Make the API call to create the tag post
-      const tagResponse = await fetch("http://localhost:8000/post_tags", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(tagPost),
-      });
-
-      if (!tagResponse.ok) {
-        throw new Error("Failed to create tag");
-      }
-
-      // Get the new tag post object from the response
-      const newTagPost = await tagResponse.json();
-
-      return newTagPost;
-    });
-
-    // Wait for all tag post requests to complete
-    const createdTagPosts = await Promise.all(tagPostPromises);
-
-    // Return the new post object along with the created tag posts
-    return { ...newPost, tagPosts: createdTagPosts };
   } catch (error) {
     // Handle any errors that occurred during the process
     console.error("Error creating post and tags:", error);
