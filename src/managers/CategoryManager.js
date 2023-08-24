@@ -48,6 +48,7 @@ export const CategoryList = () => {
     const categoryToSendToTheApi = {
       label: newCategory.label,
     };
+
   
     try {
       const response = await fetch(`http://localhost:8000/categories`, {
@@ -57,6 +58,17 @@ export const CategoryList = () => {
           "Authorization": `Token ${localStorage.getItem("auth_token")}`,
         },
         body: JSON.stringify(categoryToSendToTheApi),
+
+
+//     fetch(`http://localhost:8000/categories`, {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json", "Authorization": `Token ${localStorage.getItem("auth_token")}` },
+//       body: JSON.stringify(categoryToSendToTheApi),
+//     })
+//       .then((response) => response.json())
+//       .then(() => {
+//         fetchCategories();
+// >>>>>>> main
       });
   
       if (!response.ok) {
