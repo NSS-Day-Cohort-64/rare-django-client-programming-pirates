@@ -14,9 +14,14 @@ export const getTheCategories = async () => {
 
   return categories;
 };
-
 export const getAllTags = async () => {
-  const response = await fetch(`http://localhost:8000/tags`);
+  console.log(localStorage.getItem("auth_token"))
+  const response = await fetch(`http://localhost:8000/tags`, {
+    method: "GET",
+    headers: {
+      "Authorization": `Token ${localStorage.getItem("auth_token")}`
+    }
+  });
   const tags = await response.json();
 
   return tags;
