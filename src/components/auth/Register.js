@@ -8,7 +8,6 @@ export const Register = ({ setToken, setIsAdmin, isAdmin }) => {
   const lastName = useRef()
   const email = useRef()
   const username = useRef()
-  const bio = useRef()
   const password = useRef()
   const verifyPassword = useRef()
   const passwordDialog = useRef()
@@ -26,33 +25,14 @@ export const Register = ({ setToken, setIsAdmin, isAdmin }) => {
         first_name: firstName.current.value,
         last_name: lastName.current.value,
         email: email.current.value,
-        password: password.current.value,
-        bio: bio.current.value,
-        is_admin: 0
+        password: password.current.value
       }
 
       registerUser(newUser)
-        .then(response => {
-          console.log("Registration response:", response);
-          // const res = JSON.parse(response)
-          if ("valid" in response && response.valid) {
-            console.log("Registration successful");
-            // Register succeeded, now log in the user
-            const loginCredentials = {
-              username: newUser.username,
-              password: newUser.password,
-            };
-
-            loginUser(loginCredentials)
-              .then((loginResponse) => {
-                if ("valid" in loginResponse && loginResponse.valid) {
-                  // Successfully logged in, set token and isAdmin
-                  setToken(loginResponse.token);
-                  setIsAdmin(loginResponse.token);
-                  navigate("*");
-                  console.log("Navigating to", isAdmin !== 0 ? "Admin Home" : "User Home");
-                }
-              });
+        .then(res => {
+          if ("valid" in res && res.valid) {
+            setToken(res.token)
+            navigate("/posts/UserPosts/UserAllPosts")
           }
         });
     } else {
@@ -108,13 +88,6 @@ export const Register = ({ setToken, setIsAdmin, isAdmin }) => {
                 <input className="input" type="password" placeholder="Verify Password" ref={verifyPassword} />
               </p>
             </div>
-          </div>
-        </div>
-
-        <div className="field">
-          <label className="label">Bio</label>
-          <div className="control">
-            <textarea className="textarea" placeholder="Tell us about yourself..." ref={bio}></textarea>
           </div>
         </div>
 
