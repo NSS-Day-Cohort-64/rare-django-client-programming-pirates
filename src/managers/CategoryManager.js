@@ -11,31 +11,76 @@ export const CategoryList = () => {
     deleteModalVisible: false,
   });
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [error, setError] = useState(null);
 
-  const fetchCategories = async () => {
-    const importedCategories = await getTheCategories();
-    updateCategory(importedCategories);
+  const fetchCategories = async (sortParam, filterParam) => {
+    const url = new URL('http://localhost:8000/categories');
+    if (sortParam) url.searchParams.append('sort_by', sortParam);
+    if (filterParam) url.searchParams.append('filter_by', filterParam);
+  
+    try {
+      const response = await fetch(url.toString(), {
+        headers: {
+          Authorization: `Token ${localStorage.getItem("auth_token")}`,
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Request failed with status: ${response.status}`);
+      }
+  
+      const responseData = await response.json();
+  
+      if (Array.isArray(responseData)) {
+        // The API response is an array
+        updateCategory(responseData);
+      } else {
+        console.error("API response is not an array:", responseData);
+      }
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
   };
+  
 
-  useEffect(() => {
-    fetchCategories();
-  }, []);
-
-  const handleAddingCategory = (event) => {
+  const handleAddingCategory = async (event) => {
     event.preventDefault();
     const categoryToSendToTheApi = {
       label: newCategory.label,
     };
 
-    fetch(`http://localhost:8000/categories`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": `Token ${localStorage.getItem("auth_token")}` },
-      body: JSON.stringify(categoryToSendToTheApi),
-    })
-      .then((response) => response.json())
-      .then(() => {
-        fetchCategories();
+  
+    try {
+      const response = await fetch(`http://localhost:8000/categories`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Token ${localStorage.getItem("auth_token")}`,
+        },
+        body: JSON.stringify(categoryToSendToTheApi),
+
+
+//     fetch(`http://localhost:8000/categories`, {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json", "Authorization": `Token ${localStorage.getItem("auth_token")}` },
+//       body: JSON.stringify(categoryToSendToTheApi),
+//     })
+//       .then((response) => response.json())
+//       .then(() => {
+//         fetchCategories();
+// >>>>>>> main
       });
+  
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
+      }
+  
+      fetchCategories();
+    } catch (error) {
+      console.error("Error adding category:", error.message);
+      setError("An error occurred while adding the category.");
+    }
   };
 
   const handleEditClick = (category) => {
@@ -61,6 +106,10 @@ export const CategoryList = () => {
     console.log("Deleting category:", selectedCategory);
     setModalsVisible({ ...modalsVisible, deleteModalVisible: false });
   };
+
+  useEffect(() => {
+    fetchCategories(); // Call the function without any parameters for initial load
+  }, []);
 
   return (
     <>

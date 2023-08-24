@@ -1,9 +1,9 @@
 import { useRef } from "react"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
-import { registerUser } from "../../managers/AuthManager"
+import { registerUser, loginUser } from "../../managers/AuthManager"
 
-export const Register = ({ setToken, setIsAdmin }) => {
+export const Register = ({ setToken, setIsAdmin, isAdmin }) => {
   const firstName = useRef()
   const lastName = useRef()
   const email = useRef()
@@ -16,7 +16,10 @@ export const Register = ({ setToken, setIsAdmin }) => {
   const handleRegister = (e) => {
     e.preventDefault()
 
+    console.log("handleRegister - Registration form submitted");
+
     if (password.current.value === verifyPassword.current.value) {
+      console.log("Passwords match");
       const newUser = {
         username: username.current.value,
         first_name: firstName.current.value,
@@ -31,8 +34,9 @@ export const Register = ({ setToken, setIsAdmin }) => {
             setToken(res.token)
             navigate("/posts/UserPosts/UserAllPosts")
           }
-        })
+        });
     } else {
+      console.log("Passwords do not match");
       passwordDialog.current.showModal()
     }
   }
