@@ -133,3 +133,12 @@ export const deleteSubscription = async (id) => {
     method: "DELETE"
   })
 }
+
+export const deleteTag = async (tagId) => {
+  fetch(`http://localhost:8000/tags/${tagId}`, {
+    method: "DELETE",
+    headers:{
+       "Authorization": `Token ${localStorage.getItem("auth_token")}`
+  }
+  })
+}
