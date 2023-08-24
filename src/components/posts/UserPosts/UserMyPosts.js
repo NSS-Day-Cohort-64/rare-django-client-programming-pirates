@@ -1,62 +1,25 @@
 import { useState, useEffect } from "react";
 import "./myPosts.css";
 import { useNavigate } from "react-router-dom";
+import { getUserPost } from "../../../managers/posts";
 
-export const UserMyPosts = () => {
+export const UserMyPosts = ({ token }) => {
   const [posts, updatePosts] = useState([]);
-  const [postReactions, updatePostReactions] = useState([]);
   const [modalsVisible, setModalsVisible] = useState({
     deleteModalVisible: false,
   });
   const [selectedPost, setSelectedPost] = useState(null);
-
-  const rareUserId = localStorage.getItem("auth_token");
-  const rareUser = JSON.parse(rareUserId);
   const navigate = useNavigate()
 
-  const fetchedPosts = () => {
-    fetch(`http://localhost:8000/posts`)
-      .then((response) => response.json())
-      .then((postData) => {
-        updatePosts(postData);
-      });
-  };
-
   useEffect(() => {
-    fetchedPosts();
-  }, []);
-
-  useEffect(() => {
-    fetch(`http://localhost:8000/post_reactions`)
-      .then((response) => response.json())
-      .then((postReactionData) => {
-        updatePostReactions(postReactionData);
-      });
-  }, []);
-
-  const handleConfirmDelete = (post) => {
-    setSelectedPost(post);
-    setModalsVisible({ ...modalsVisible, deleteModalVisible: true });
-  };
-
-  const handleDelete = () => {
-    fetch(`http://localhost:8000/posts/${selectedPost.id}`, {
-      method: "DELETE",
-    }).then(() => {
-      fetchedPosts();
-    });
-    console.log("Deleting post:", selectedPost);
-    setModalsVisible({ ...modalsVisible, deleteModalVisible: false });
-  };
+    getUserPost({ token }).then((posts) => 
+    updatePosts(posts))
+  }, [token]);
 
   return (
     <div className="my-posts-container">
       <h2 className="your-post-header">Your Posts</h2>
       {posts.map((post) => {
-        if (post.user_id === rareUser) {
-          const reactionCount = postReactions.filter(
-            (pr) => pr.post_id === post.id
-          );
 
           return (
             <div className="post-card" key={post.id}>
@@ -70,19 +33,11 @@ export const UserMyPosts = () => {
                   alt="Post Image"
                 />
               )}
-              <p className="post-author">Author: {post.user.first_name} {post.user.last_name}</p>
-              <p className="post-reaction-count">
-                Reactions: {reactionCount.length}
-              </p>
+              <p className="post-author">Author: {post?.user?.first_name} {post?.user?.last_name}</p>
               <p className="post-category">Category: {post.category.label}</p>
               <button onClick={() => navigate(`/posts/UserPosts/UserEditPost/${post.id}`)}> Edit </button>
-              <button onClick={() => handleConfirmDelete(post)}>
-                {" "}
-                Delete{" "}
-              </button>
             </div>
           );
-        }
       })}
 
       {modalsVisible.deleteModalVisible && selectedPost && (
@@ -106,9 +61,6 @@ export const UserMyPosts = () => {
               <p>Are you sure you want to delete "{selectedPost.title}"?</p>
             </section>
             <footer className="modal-card-foot">
-              <button className="button is-danger" onClick={handleDelete}>
-                Confirm Delete
-              </button>
               <button
                 className="button"
                 onClick={() =>
