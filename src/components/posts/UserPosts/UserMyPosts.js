@@ -46,7 +46,7 @@ export const UserMyPosts = ({ token }) => {
             />
           )}
           <p className="post-author">
-            Author: {post?.user?.first_name} {post?.user?.last_name}
+            Author: {post?.author?.full_name}
           </p>
           <p className="post-category">Category: {post.category.label}</p>
           <button onClick={() => navigate(`/posts/UserPosts/UserEditPost/${post.id}`)}> Edit </button>

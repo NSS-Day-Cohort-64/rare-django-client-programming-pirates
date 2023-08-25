@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { getPostById} from "../../../managers/posts";
 import "./myPosts.css";
 
 export const UserSelectedPostDetails = () => {
@@ -7,29 +8,11 @@ export const UserSelectedPostDetails = () => {
     const [selectedPost, setSelectedPost] = useState([]);
     const [postComments, setPostComments ] = useState([]);
 
-    const getPosts = () => {
-        fetch(`http://localhost:8000/posts/${postId}`, {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Token ${localStorage.getItem("auth_token")}`,
-            },
-        })
-            .then(response => response.json())
-            .then((postArray) => {
-                setSelectedPost([postArray]);
-            })
-    }
-// import { getPostById } from "../../../managers/posts";
-
-// export const UserSelectedPostDetails = () => {
-//     const { postId } = useParams();
-//     const [selectedPost, setSelectedPost] = useState(null);
-
-//     const getPostDetails = () => {
-//         getPostById({ postId }).then((UserSelectedPostDetails) => {
-//             setSelectedPost(UserSelectedPostDetails);
-//         });
-//     };
+    const getPostDetails = () => {
+        getPostById({ postId }).then((UserSelectedPostDetails) => {
+        setSelectedPost(UserSelectedPostDetails);
+        });
+    };
 
     const getComments = () => {
         fetch(`http://localhost:8000/comments?post=${postId}`, {
@@ -45,16 +28,14 @@ export const UserSelectedPostDetails = () => {
     }
 
     useEffect(() => {
-
-        getPosts();
         getComments();
     }, []);
 
-//         if (postId) {
-//             getPostDetails();
-//         }
-//     }, [postId]);
-// >>>>>>> main
+useEffect(() => {
+    if (postId) {
+    getPostDetails();
+    }
+}, [postId]);
 
 return (
     <div>
@@ -77,7 +58,7 @@ return (
             <h2>Comments:</h2>
             <ul>
                 {postComments.map(comment => (
-                    <li key={comment.id}>{comment.content} by {comment.author}</li>
+                    <li key={comment.id}>{comment.content}</li>
                 ))}
             </ul>
         </div>
