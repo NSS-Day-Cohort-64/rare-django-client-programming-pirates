@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./myPosts.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { getUserPost } from "../../../managers/posts";
 
 export const UserMyPosts = ({ token }) => {
@@ -10,6 +10,7 @@ export const UserMyPosts = ({ token }) => {
   });
   const [selectedPost, setSelectedPost] = useState(null);
   const navigate = useNavigate()
+
 
   useEffect(() => {
     getUserPost({ token }).then((posts) => 
@@ -23,7 +24,9 @@ export const UserMyPosts = ({ token }) => {
 
           return (
             <div className="post-card" key={post.id}>
-              <h3 className="post-title">{post.title}</h3>
+              <Link to={`UserPostDetails/${post.id}`}>
+                <h3 className="post-title">{post.title}</h3>
+              </Link>
               <p className="post-publication-date"> {post.publication_date}</p>
               <p className="post-content">{post.content}</p>
               {post.image_url && (

@@ -1,38 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { getPostById } from "../../../managers/posts";
 
 export const UserSelectedPostDetails = () => {
     const { postId } = useParams();
-    const [selectedPost, setSelectedPost] = useState([]);
+    const [selectedPost, setSelectedPost] = useState(null);
 
-    const getPosts = () => {
-        fetch(`http://localhost:8000/posts/${postId}`)
-            .then(response => response.json())
-            .then((postArray) => {
-                setSelectedPost([postArray])
-            })
-    }
+    const getPostDetails = () => {
+        getPostById({ postId }).then((UserSelectedPostDetails) => {
+            setSelectedPost(UserSelectedPostDetails);
+        });
+    };
 
     useEffect(() => {
-        getPosts()
-    }, []);
+        if (postId) {
+            getPostDetails();
+        }
+    }, [postId]);
 
     return (
         <div>
             <h1>Post Details</h1>
-            <ul>
+            {selectedPost && (
                 <article className="post-card">
-                    {selectedPost.map((post) => (
-                        <li key={post.id}>
-                            <h3>{post.title}</h3>
-                            <p>Author: <Link to={`/Profile/${post.user?.id}`}>{post.user?.first_name} {post.user?.last_name}</Link></p>
-                            <p>Category: {post.category?.label}</p>
-                            <p>Publication date: {post.publication_date}</p>
-                            <p>Content: {post.content}</p>
-                        </li>
-                    ))}
+                    <h3>{selectedPost.title}</h3>
+                    <p>
+                        Author:{" "}
+                        <Link to={`/Profile/${selectedPost.user?.id}`}>
+                            {selectedPost?.author?.full_name}
+                        </Link>
+                    </p>
+                    <p>Category: {selectedPost?.category?.label}</p>
+                    <p>Publication date: {selectedPost?.publication_date}</p>
+                    <p>Content: {selectedPost?.content}</p>
                 </article>
-            </ul>
+            )}
         </div>
     );
 };
+
