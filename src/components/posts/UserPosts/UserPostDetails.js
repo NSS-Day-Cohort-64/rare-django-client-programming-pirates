@@ -25,11 +25,11 @@ export const UserSelectedPostDetails = () => {
 //     const { postId } = useParams();
 //     const [selectedPost, setSelectedPost] = useState(null);
 
-//     const getPostDetails = () => {
-//         getPostById({ postId }).then((UserSelectedPostDetails) => {
-//             setSelectedPost(UserSelectedPostDetails);
-//         });
-//     };
+    // const getPostDetails = () => {
+    //     getPostById({ postId }).then((UserSelectedPostDetails) => {
+    //         setSelectedPost(UserSelectedPostDetails);
+    //     });
+    // };
 
     const getComments = () => {
         fetch(`http://localhost:8000/comments?post=${postId}`, {
