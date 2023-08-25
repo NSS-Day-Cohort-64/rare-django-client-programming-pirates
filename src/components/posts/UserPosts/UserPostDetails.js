@@ -20,7 +20,7 @@ export const UserSelectedPostDetails = () => {
 
     return (
         <div>
-            <h1>Post Details</h1>
+            <h1>Post Details!:</h1>
             {selectedPost && (
                 <article className="post-card">
                     <h3>{selectedPost.title}</h3>
