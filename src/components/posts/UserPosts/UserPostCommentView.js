@@ -6,7 +6,7 @@ export const UserPostCommentView = () => {
     const { postId } = useParams();
     const [commentContent, setCommentContent] = useState("");
     const [postComments, setPostComments] = useState([]);
-    
+
     const handleCommentSubmit = async (e) => {
         e.preventDefault();
 
@@ -25,11 +25,16 @@ export const UserPostCommentView = () => {
 
             if (response.ok) {
                 await response.json();
-                fetch(`http://localhost:8000/posts/${postId}`)
+                fetch(`http://localhost:8000/posts/${postId}`, {
+                    headers: {
+                        Authorization: `Token ${localStorage.getItem("auth_token")}`,
+                    },
+                })
+
                     .then(response => response.json())
                     .then(postData => {
                         setPostComments(postData.comments);
-                        navigate(`/posts/UserPosts/UserAllPosts/UserPostDetails/${postId}`); 
+                        navigate(`/posts/UserPosts/UserAllPosts/UserPostDetails/${postId}`);
                     });
 
                 setCommentContent("");
@@ -48,7 +53,7 @@ export const UserPostCommentView = () => {
             },
         })
             .then(response => response.json())
-            .then(postData => setPostComments(postData.comments)); 
+            .then(postData => setPostComments(postData.comments));
     }, []);
 
 
