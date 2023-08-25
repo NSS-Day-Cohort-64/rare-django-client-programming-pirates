@@ -108,6 +108,7 @@ export const deleteCategory = async (id) => {
   })
 }
 
+
 export const editCategory = async (category) => {
   await fetch(`http://localhost:8000/categories/${category.id}`, {
     method: "PUT",
@@ -116,5 +117,15 @@ export const editCategory = async (category) => {
       "Authorization": `Token ${localStorage.getItem("auth_token")}`
     },
     body: JSON.stringify(category)
+  })
+}
+
+export const deleteTag = async (tagId) => {
+ await fetch(`http://localhost:8000/tags/${tagId}`, {
+    method: "DELETE",
+    headers:{
+       "Authorization": `Token ${localStorage.getItem("auth_token")}`
+  }
+
   })
 }

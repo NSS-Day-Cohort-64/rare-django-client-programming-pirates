@@ -5,17 +5,37 @@ import "./myPosts.css";
 export const AdminSelectedPostDetails = () => {
     const { postId } = useParams();
     const [selectedPost, setSelectedPost] = useState([]);
+    const [postComments, setPostComments ] = useState([]);
 
     const getPosts = () => {
-        fetch(`http://localhost:8000/posts/${postId}`)
-            .then((response) => response.json())
+        fetch(`http://localhost:8000/posts/${postId}`, {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Token ${localStorage.getItem("auth_token")}`,
+            },
+        })
+            .then(response => response.json())
             .then((postArray) => {
                 setSelectedPost([postArray]);
-            });
+            })
     };
+
+    const getComments = () => {
+        fetch(`http://localhost:8000/comments?post=${postId}`, {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Token ${localStorage.getItem("auth_token")}`,
+            },
+        })
+        .then(response => response.json())
+        .then((commentArray) => {
+            setPostComments(commentArray);
+        })
+    }
 
     useEffect(() => {
         getPosts();
+        getComments();
     }, []);
 
     return (
@@ -34,6 +54,17 @@ export const AdminSelectedPostDetails = () => {
                     ))}
                 </article>
             </ul>
+            <div>
+                <h2>Comments:</h2>
+                <ul>
+                    {postComments.map(comment => (
+                        <li key={comment.id}>{comment.content} by {comment.author}</li>
+                    ))}
+                </ul>
+            </div>
+            <button>
+                <Link to={`/posts/${postId}/add-comment`}>Add Comment</Link>
+            </button>
         </div>
     );
 };
