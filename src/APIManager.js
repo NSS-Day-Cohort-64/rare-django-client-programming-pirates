@@ -99,8 +99,17 @@ export const deleteSubscription = async (id) => {
   })
 }
 
+export const deleteCategory = async (id) => {
+  await fetch(`http://localhost:8000/categories/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Authorization": `Token ${localStorage.getItem("auth_token")}`
+    }
+  })
+}
+
 export const deleteTag = async (tagId) => {
-  fetch(`http://localhost:8000/tags/${tagId}`, {
+ await fetch(`http://localhost:8000/tags/${tagId}`, {
     method: "DELETE",
     headers:{
        "Authorization": `Token ${localStorage.getItem("auth_token")}`

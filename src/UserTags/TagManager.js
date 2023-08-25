@@ -14,12 +14,13 @@ export const TagManagerAndCreator = () => {
 
     const fetchTags = async () => {
         try {
-            const importedTags = await getAllTags();
+            const importedTags = await getAllTags()
             setTags(importedTags);
         } catch (error) {
             console.error("Error fetching tags:", error);
         }
     };
+
 
     useEffect(() => {
 
@@ -59,14 +60,12 @@ export const TagManagerAndCreator = () => {
 
     const handleDeleteConfirmation = async () => {
         setShowConfirmationDialog(false);
-      
         try {
           for (const tagId of tagsToDelete) {
             await deleteTag(tagId); // Use your APIManager function to delete the tag
           }
-      
-          // After deleting, fetch the updated tag list
-          fetchTags();
+          
+         await fetchTags();
         } catch (error) {
           console.error("Error deleting tags:", error);
         }

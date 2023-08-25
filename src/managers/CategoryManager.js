@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getTheCategories } from "../APIManager";
+import { deleteCategory, getTheCategories } from "../APIManager";
 
 import "./CategoryModel.css";
 
@@ -59,16 +59,6 @@ export const CategoryList = () => {
         },
         body: JSON.stringify(categoryToSendToTheApi),
 
-
-//     fetch(`http://localhost:8000/categories`, {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json", "Authorization": `Token ${localStorage.getItem("auth_token")}` },
-//       body: JSON.stringify(categoryToSendToTheApi),
-//     })
-//       .then((response) => response.json())
-//       .then(() => {
-//         fetchCategories();
-// >>>>>>> main
       });
   
       if (!response.ok) {
@@ -85,7 +75,12 @@ export const CategoryList = () => {
 
   const handleEditClick = (category) => {
     setSelectedCategory(category);
-    setModalsVisible({ editModalVisible: true, deleteModalVisible: true });
+    setModalsVisible({ editModalVisible: true });
+  };
+
+  const handleDeleteClick = (category) => {
+    setSelectedCategory(category);
+    setModalsVisible({ deleteModalVisible: true });
   };
 
   const handleEdit = (newLabel) => {
@@ -101,8 +96,9 @@ export const CategoryList = () => {
     setModalsVisible({ ...modalsVisible, editModalVisible: false });
   };
 
-  const handleConfirmDelete = () => {
-    // delete logic would go here
+  const handleConfirmDelete = async () => {
+    await deleteCategory(selectedCategory.id);
+    fetchCategories();
     console.log("Deleting category:", selectedCategory);
     setModalsVisible({ ...modalsVisible, deleteModalVisible: false });
   };
@@ -121,6 +117,7 @@ export const CategoryList = () => {
             <a href="#" onClick={() => handleEditClick(category)}>
               {category.label}
             </a>
+            <button className="delete-btn" onClick={() => handleDeleteClick(category)}>Delete</button>
           </section>
         ))}
       </div>
