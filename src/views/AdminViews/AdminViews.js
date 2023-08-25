@@ -9,6 +9,8 @@ import { UserListManager } from "../../managers/AdminUserListManager.js"
 import { AdminMyPosts } from "../../components/posts/AdminPosts/AdminMyPosts"
 import { EditAdminPost } from "../../components/posts/AdminPosts/AdminEditPost"
 import { Profile } from "../../profile/Profile"
+import { AdminPostCommentView } from "../../components/posts/AdminPosts/AdminPostCommentView"
+
 
 
 export const AdminViews = () => {
@@ -23,6 +25,7 @@ export const AdminViews = () => {
             <Route path="/posts/AdminPosts/AdminNewPost" element={<CreateNewAdminPost />} />
             <Route path="/posts/AdminPosts/AdminEditPost/:postId" element={<EditAdminPost />} />
             <Route path="/Profile/:userId" element={<Profile />} />
+            <Route path="/posts/:postId/add-comment" element={<AdminPostCommentView />} />
         </Routes>
     )
 }
