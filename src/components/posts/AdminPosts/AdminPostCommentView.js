@@ -29,7 +29,7 @@ export const AdminPostCommentView = () => {
                     .then(response => response.json())
                     .then(postData => {
                         setPostComments(postData.comments);
-                        navigate(`/posts/AdminPosts/AdminAllPosts/AdminPostDetails/${postId}`); // Use navigate
+                        navigate(`/posts/AdminPosts/AdminAllPosts/AdminPostDetails/${postId}`); 
                     });
 
                 setCommentContent("");
@@ -48,7 +48,7 @@ export const AdminPostCommentView = () => {
             },
         })
             .then(response => response.json())
-            .then(postData => setPostComments(postData.comments)); // Assuming your API response structure has a "comments" field
+            .then(postData => setPostComments(postData.comments)); 
     }, []);
 
 
