@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getAllTags } from "../APIManager.js";
+import { editTag, getAllTags } from "../APIManager.js";
 import { useNavigate } from "react-router-dom";
 import "./TagManager.css";
 import { deleteTag } from "../APIManager.js";
@@ -71,6 +71,11 @@ export const TagManagerAndCreator = () => {
         }
       };
       
+    const handleEditButton = async function(event) {
+        const tagToEdit = event.target.value
+        await editTag(tagToEdit)
+        await fetchTags()
+    }
       
 
     return (
@@ -80,7 +85,9 @@ export const TagManagerAndCreator = () => {
                 <div className="tag-list">
                     <ul>
                         {tags.map((tag) => (
+                      
                             <div key={`div--${tag.id}`} className="tag-container">
+                                <button value={tag.id} onClick={handleEditButton}>edit</button>
                                 <li key={tag.id} className="tag-item">
                                     {tag.label}
                                 </li>
@@ -89,6 +96,7 @@ export const TagManagerAndCreator = () => {
                                     <input id={tag.id} key={`tag--${tag.id}`} onChange={handleCheckboxChange} value={tag.id} type="checkbox" />
                                 </div>
                             </div>
+                            
                         ))}
                     </ul>
                     <button onClick={() => setShowConfirmationDialog(true)}>delete selected tags</button>

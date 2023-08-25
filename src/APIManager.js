@@ -116,3 +116,15 @@ export const deleteTag = async (tagId) => {
   }
   })
 }
+
+export const editTag = async (tagId) => {
+  await fetch(`http://localhost:8000/tags/${tagId}`, {
+    method: "PUT",
+    headers: {
+      "Authorization": `Token ${localStorage.getItem("auth_token")}`
+    },
+    body: {
+      
+    }
+  })
+}
