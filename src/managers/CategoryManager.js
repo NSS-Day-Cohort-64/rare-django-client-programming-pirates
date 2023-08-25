@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { deleteCategory, getTheCategories } from "../APIManager";
+import { deleteCategory, editCategory, getTheCategories } from "../APIManager";
 
 import "./CategoryModel.css";
 
@@ -83,16 +83,18 @@ export const CategoryList = () => {
     setModalsVisible({ deleteModalVisible: true });
   };
 
-  const handleEdit = (newLabel) => {
-    if (newLabel) {
-      //edit logic would go here
+  const handleEdit = async (newLabel) => {
+
+      selectedCategory.label = newLabel;
+      await editCategory(selectedCategory);
+      fetchCategories();
       console.log(
         "Editing category:",
         selectedCategory,
         "with new label:",
         newLabel
       );
-    }
+    
     setModalsVisible({ ...modalsVisible, editModalVisible: false });
   };
 
