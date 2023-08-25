@@ -11,6 +11,7 @@ import { Profile } from "../../profile/Profile"
 import { UserPostCommentView } from "../../components/posts/UserPosts/UserPostCommentView"
 
 
+
 export const UserViews = () => {
     return (
         <Routes>
@@ -19,6 +20,7 @@ export const UserViews = () => {
             <Route path="/tagManager" element={<TagManagerAndCreator />} />
             <Route path="/posts/UserPosts/UserAllPosts/UserPostDetails/:postId" element={<UserSelectedPostDetails />} />
             <Route path="/posts/UserPosts/UserMyPosts" element={<UserMyPosts />} />
+            <Route path="/posts/UserPosts/UserMyPosts/UserPostDetails/:postId" element={<UserSelectedPostDetails />} />
             <Route path="/posts/UserPosts/NewUserPost" element={<CreateNewUserPost />} />
             <Route path="/posts/UserPosts/UserEditPost/:postId" element={<EditUserPost />} />
             <Route path="/Profile/:userId" element={<Profile />} />

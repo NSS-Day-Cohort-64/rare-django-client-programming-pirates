@@ -19,6 +19,17 @@ export const UserSelectedPostDetails = () => {
                 setSelectedPost([postArray]);
             })
     }
+// import { getPostById } from "../../../managers/posts";
+
+// export const UserSelectedPostDetails = () => {
+//     const { postId } = useParams();
+//     const [selectedPost, setSelectedPost] = useState(null);
+
+//     const getPostDetails = () => {
+//         getPostById({ postId }).then((UserSelectedPostDetails) => {
+//             setSelectedPost(UserSelectedPostDetails);
+//         });
+//     };
 
     const getComments = () => {
         fetch(`http://localhost:8000/comments?post=${postId}`, {
@@ -34,37 +45,45 @@ export const UserSelectedPostDetails = () => {
     }
 
     useEffect(() => {
+
         getPosts();
         getComments();
     }, []);
 
-    return (
+//         if (postId) {
+//             getPostDetails();
+//         }
+//     }, [postId]);
+// >>>>>>> main
+
+return (
+    <div>
+        <h1>Post Details:</h1>
+        {selectedPost && (
+            <article className="post-card">
+                <h3>{selectedPost.title}</h3>
+                <p>
+                    Author:{" "}
+                    <Link to={`/Profile/${selectedPost.user?.id}`}>
+                        {selectedPost?.author?.full_name}
+                    </Link>
+                </p>
+                <p>Category: {selectedPost?.category?.label}</p>
+                <p>Publication date: {selectedPost?.publication_date}</p>
+                <p>Content: {selectedPost?.content}</p>
+            </article>
+        )}
         <div>
-            <h1>Post Details</h1>
+            <h2>Comments:</h2>
             <ul>
-                <article className="post-card">
-                    {selectedPost.map((post) => (
-                        <li key={post.id}>
-                            <h3>{post.title}</h3>
-                            <p>Author: <Link to={`/Profile/${post.user?.id}`}>{post.user?.first_name} {post.user?.last_name}</Link></p>
-                            <p>Category: {post.category?.label}</p>
-                            <p>Publication date: {post.publication_date}</p>
-                            <p>Content: {post.content}</p>
-                        </li>
-                    ))}
-                </article>
+                {postComments.map(comment => (
+                    <li key={comment.id}>{comment.content} by {comment.author}</li>
+                ))}
             </ul>
-            <div>
-                <h2>Comments:</h2>
-                <ul>
-                    {postComments.map(comment => (
-                        <li key={comment.id}>{comment.content} by {comment.author}</li>
-                    ))}
-                </ul>
-            </div>
-            <button>
-                <Link to={`/posts/${postId}/add-comment`}>Add Comment</Link>
-            </button>
         </div>
-    );
-};
+        <button>
+            <Link to={`/posts/${postId}/add-comment`}>Add Comment</Link>
+        </button>
+    </div>
+);
+}
