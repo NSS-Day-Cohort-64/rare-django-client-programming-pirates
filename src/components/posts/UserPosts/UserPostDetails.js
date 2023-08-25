@@ -50,7 +50,7 @@ return (
                     </Link>
                 </p>
                 <p>Category: {selectedPost?.category?.label}</p>
-                <p>Publication date: {selectedPost?.publication_date}</p>
+                <p>Publication date & Time: {selectedPost?.publication_date}</p>
                 <p>Content: {selectedPost?.content}</p>
             </article>
         )}
