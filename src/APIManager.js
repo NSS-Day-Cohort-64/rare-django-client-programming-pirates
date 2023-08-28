@@ -131,7 +131,6 @@ export const deleteTag = async (tagId) => {
     headers:{
        "Authorization": `Token ${localStorage.getItem("auth_token")}`
   }
-
   })
 }
 
@@ -153,4 +152,15 @@ export const togglePostApproval = async (postId, currentStatus) => {
     },
     body: JSON.stringify({ approved: !currentStatus }),
   });
+}
+
+export const editTag = async (tagId, newTag) => {
+  await fetch(`http://localhost:8000/tags/${tagId}`, {
+    method: "PUT",
+    headers: {
+      "Authorization": `Token ${localStorage.getItem("auth_token")}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(newTag)
+  })
 }

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { registerUser, loginUser } from "../../managers/AuthManager"
 
-export const Register = ({ setToken, setIsAdmin, isAdmin }) => {
+export const Register = ({ setToken, setIsAdmin, isAdmin, setUserId }) => {
   const firstName = useRef()
   const lastName = useRef()
   const email = useRef()
@@ -32,13 +32,15 @@ export const Register = ({ setToken, setIsAdmin, isAdmin }) => {
         .then(res => {
           if ("valid" in res && res.valid) {
             setToken(res.token)
-            navigate("/posts/UserPosts/UserAllPosts")
+            setUserId(res.user)
+            navigate("/posts/UserPosts/UserAllPosts");
           }
         });
     } else {
       console.log("Passwords do not match");
       passwordDialog.current.showModal()
     }
+    navigate('/login')
   }
 
   return (
