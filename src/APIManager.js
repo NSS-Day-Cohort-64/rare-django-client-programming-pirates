@@ -130,14 +130,13 @@ export const deleteTag = async (tagId) => {
   })
 }
 
-export const editTag = async (tagId) => {
+export const editTag = async (tagId, newTag) => {
   await fetch(`http://localhost:8000/tags/${tagId}`, {
     method: "PUT",
     headers: {
-      "Authorization": `Token ${localStorage.getItem("auth_token")}`
+      "Authorization": `Token ${localStorage.getItem("auth_token")}`,
+      "Content-Type": "application/json"
     },
-    body: {
-      
-    }
+    body: JSON.stringify(newTag)
   })
 }
