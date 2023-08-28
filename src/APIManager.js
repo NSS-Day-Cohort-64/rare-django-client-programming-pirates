@@ -143,3 +143,14 @@ export const deleteComment = async (commentId) => {
     }
   })
 }
+
+export const togglePostApproval = async (postId, currentStatus) => {
+  await fetch(`http://localhost:8000/posts/${postId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Token ${localStorage.getItem("auth_token")}`
+    },
+    body: JSON.stringify({ approved: !currentStatus }),
+  });
+}
