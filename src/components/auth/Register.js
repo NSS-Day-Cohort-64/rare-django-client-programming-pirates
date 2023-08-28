@@ -40,6 +40,7 @@ export const Register = ({ setToken, setIsAdmin, isAdmin, setUserId }) => {
       console.log("Passwords do not match");
       passwordDialog.current.showModal()
     }
+    navigate('/login')
   }
 
   return (
