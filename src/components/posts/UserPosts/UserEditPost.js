@@ -1,29 +1,23 @@
 import { useEffect, useState } from "react"
 import { editPost, getAllTags, getPost, getTheCategories } from "../../../APIManager"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 
 export const EditUserPost = () => {
 
     // This declares navigate as an invocation of useNavigate
     const navigate = useNavigate()
 
-    const userId = localStorage.getItem("auth_token")
     const { postId } = useParams()
 
     const [post, update] = useState({
-        user_id: parseInt(userId),
+        id: 0,
         category_id: 0,
         title: "",
-        publication_date: 0,
         image_url: "",
-        content: "",
-        approved: 1
+        content: ""
     })
-
-    const [postTags, updatePostTags] = useState([])
-
     const [allCategories, setCategories] = useState([])
-    const [allTags, setTags] = useState([])
+
 
     useEffect(
         () => {
@@ -37,47 +31,20 @@ export const EditUserPost = () => {
 
     useEffect(
         () => {
-            getAllTags()
-                .then((tags) => {
-                    setTags(tags)
-                })
-        },
-        []
-    )
-
-    useEffect(
-        () => {
             getPost(postId)
                 .then((postToEdit) => {
-                    const copy = { ...post }
-                    copy.id = parseInt(postId);
-                    copy.user_id = postToEdit.user_id;
-                    copy.category_id = postToEdit.category_id;
-                    copy.title = postToEdit.title;
-                    copy.publication_date = postToEdit.publication_date;
-                    copy.image_url = postToEdit.image_url;
-                    copy.content = postToEdit.content;
-                    copy.approved = postToEdit.approved
-                    update(copy)
+                    update({
+                        id: postToEdit.id,
+                        category_id: postToEdit.category.id,
+                        title: postToEdit.title,
+                        image_url: postToEdit.image_url,
+                        content: postToEdit.content
+                    });
                 })
         },
-        []
-    )
-
-    useEffect(
-        () => {
-            getCurrentDate()
-        },
-        []
-    )
-
-    const getCurrentDate = () => {
-        const currentDate = new Date()
-        const formattedDate = currentDate.toDateString().substring(4)
-        const copy = { ...post }
-        copy.publication_date = formattedDate
-        update(copy)
-    }
+        [postId]
+    );
+    
 
     const handleSaveButtonClick = async (event) => {
         event.preventDefault()
@@ -139,7 +106,7 @@ export const EditUserPost = () => {
                             onChange={
                                 (evt) => {
                                     const copy = { ...post }
-                                    copy.category_id = evt.target.value
+                                    copy.category_id = parseInt(evt.target.value)
                                     update(copy)
                                 }
                             }>
@@ -153,26 +120,10 @@ export const EditUserPost = () => {
                             ))}
                         </select>
                     </fieldset>
-                    <fieldset className="field">
-                        {allTags.map((tag) => (
-                            <div key={tag.id}>
-                                <label className="checkbox" htmlFor="Tags">{tag.label}</label>
-                                <input
-                                    type="checkbox"
-                                    name={tag.label}
-                                    value={tag.id}
-                                    onChange={
-                                        (evt) => {
-                                            // Assigning tags is a separate ticket so this is currently incomplete
-                                            const copy = { ...postTags }
-                                            copy.tag = evt.target.value
-                                            updatePostTags(copy)
-                                        }
-                                    } />
-                            </div>
-                        ))}
-                    </fieldset>
                     <button onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}>Publish</button>
+                    <Link to={`/posts/UserPosts/UserAllPosts`}>
+                        <button>Cancel</button>
+                    </Link>
                 </form>
             </main>
         </>
