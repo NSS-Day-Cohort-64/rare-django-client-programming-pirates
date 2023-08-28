@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getPostById} from "../../../managers/posts";
 import "./myPosts.css";
+import { deleteComment } from "../../../APIManager";
 
 export const UserSelectedPostDetails = () => {
     const { postId } = useParams();
@@ -37,6 +38,19 @@ useEffect(() => {
     }
 }, [postId]);
 
+const handleDeleteComment = (commentId) => {
+    const deleteWindow = window.confirm(
+        "Are you sure you want to delete this comment?"
+    );
+    if (deleteWindow) {
+        deleteComment(commentId).then(() => {
+            setPostComments((prevComments) =>
+                prevComments.filter((comment) => comment.id !== commentId)
+            );
+        });
+    }
+};
+
 return (
     <div>
         <h1>Post Details:</h1>
@@ -58,7 +72,7 @@ return (
             <h2>Comments:</h2>
             <ul>
                 {postComments.map(comment => (
-                    <li key={comment.id}>{comment.content}</li>
+                    <li key={comment.id}>{comment.content}<button type="delete" onClick={() => handleDeleteComment(comment.id)}>Delete Comment</button></li>
                 ))}
             </ul>
         </div>
