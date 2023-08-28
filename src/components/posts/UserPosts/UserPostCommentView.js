@@ -54,8 +54,11 @@ export const UserPostCommentView = () => {
                                 {comment.content}
                                 <h4>Author: {comment.author_username}</h4>
                                 <h4>Creation Date: {new Date(comment.creation_date).toLocaleDateString()}</h4>
-                                <button type="delete" onClick={() => handleDeleteComment(comment.id)}>Delete Comment</button></li>
-                                // edit button here
+                                <button type="delete" onClick={() => handleDeleteComment(comment.id)}>Delete Comment</button>
+                                <button type="edit">
+                                <Link to={`/posts/${postId}/view-comments/EditCommentForm/${comment.id}`}>Edit Comment</Link>
+                                </button>
+                            </li>
                         ))}
                     </ul>
                     <Link to={`/posts/${postId}/add-comment`}>
