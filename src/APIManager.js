@@ -60,16 +60,21 @@ export const createNewPost = async (post) => {
 };
 
 export const getPost = async (id) => {
-  const response = await fetch(`http://localhost:8000/posts/${id}`)
+  const response = await fetch(`http://localhost:8000/posts/${id}`, {
+    headers: {
+      "Authorization": `Token ${localStorage.getItem("auth_token")}`
+    }
+  });
   const postToEdit = await response.json()
   return postToEdit
 }
 
 export const editPost = async (post) => {
-  const response = await fetch(`http://localhost:8000/posts/${post.id}`, {
+  await fetch(`http://localhost:8000/posts/${post.id}`, {
     method: "PUT",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Authorization": `Token ${localStorage.getItem("auth_token")}`
     },
     body: JSON.stringify(post)
   })
