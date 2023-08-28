@@ -10,6 +10,7 @@ export const UserPostsList = () => {
     // const [selectedUser, setSelectedUser] = useState(null); // filter to filter posts by user; not needed for now 
     // const [filteredPosts, setFilteredPosts] = useState([]); // filter to filter posts by category; not needed for now 
 
+    
     const getPosts = () => {
         fetch(`http://localhost:8000/posts`, {
             headers: {
@@ -121,6 +122,9 @@ export const UserPostsList = () => {
                         <p className="post-category">
                             <strong>Category:</strong> {post.category.label}
                         </p>
+                        <Link to={`/posts/UserPosts/UserEditPost/${post.id}`}>
+                        <button className="edit-btn">Edit</button>
+                        </Link>
                     </li>
                 ))}
             </ul>
