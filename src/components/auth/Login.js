@@ -2,7 +2,7 @@ import { useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { loginUser } from "../../managers/AuthManager"
 
-export const Login = ({ setToken, setIsAdmin }) => {
+export const Login = ({ setToken, setIsAdmin, setUserId}) => {
   const username = useRef()
   const password = useRef()
   const navigate = useNavigate()
@@ -21,6 +21,7 @@ export const Login = ({ setToken, setIsAdmin }) => {
       if ("valid" in res && res.valid) {
         setToken(res.token)
         setIsAdmin(res.token)
+        setUserId(res.user)
         navigate("/")
       }
       else {

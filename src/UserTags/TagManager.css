@@ -98,5 +98,10 @@
   .confirmation-dialog button {
     margin: 0 10px;
   }
+
+  .edit-mode {
+    background-color: yellow;
+}
+
   
  
