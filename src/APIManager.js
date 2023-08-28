@@ -8,8 +8,8 @@ export const getTheCategories = async () => {
   const response = await fetch(`http://localhost:8000/categories`, {
     headers: {
       "Authorization": `Token ${localStorage.getItem("auth_token")}`
-      }
-      });
+    }
+  });
   const categories = await response.json();
 
   return categories;
@@ -80,6 +80,17 @@ export const editPost = async (post) => {
   })
 }
 
+export const editPostTags = async (postId, tags) => {
+  await fetch(`http://localhost:8000/posts/${postId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Token ${localStorage.getItem("auth_token")}`
+    },
+    body: JSON.stringify({tags: tags})
+  })
+}
+
 export const getSubscriptions = async () => {
   const response = await fetch(`http://localhost:8000/subscriptions`);
   const subscriptions = await response.json();
@@ -126,11 +137,11 @@ export const editCategory = async (category) => {
 }
 
 export const deleteTag = async (tagId) => {
- await fetch(`http://localhost:8000/tags/${tagId}`, {
+  await fetch(`http://localhost:8000/tags/${tagId}`, {
     method: "DELETE",
-    headers:{
-       "Authorization": `Token ${localStorage.getItem("auth_token")}`
-  }
+    headers: {
+      "Authorization": `Token ${localStorage.getItem("auth_token")}`
+    }
   })
 }
 
