@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { editTag, getAllTags } from "../APIManager.js";
+import { editTag, getAllTags, deleteTag } from "../APIManager.js";
 import { useNavigate } from "react-router-dom";
 import "./TagManager.css";
-import { deleteTag } from "../APIManager.js";
 
 export const TagManagerAndCreator = () => {
     const [tags, setTags] = useState([]);
@@ -82,6 +81,10 @@ export const TagManagerAndCreator = () => {
         }))
     }
 
+    const cancelEdit = function(evt){
+        setEditModes({})
+    }
+
 //  
     return (
         <div className="container">
@@ -91,7 +94,11 @@ export const TagManagerAndCreator = () => {
                     <ul>
                         {tags.map((tag) => (
                             <div key={`div--${tag.id}`} className={`tag-container `}>
-                                <button value={tag.id} onClick={handleEditButton}>edit</button>
+                                {editModes[tag.id] ? (
+                                    <button onClick={cancelEdit} >cancel</button>
+                                ): 
+                                <button value={tag.id} onClick={handleEditButton}>edit</button>                          
+                                }
                                 {editModes[tag.id] ? (
                                     <>
                                     <input
