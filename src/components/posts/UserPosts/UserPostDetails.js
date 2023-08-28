@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getPostById } from "../../../managers/posts";
 import "./myPosts.css";
+import { togglePostApproval } from "../../../APIManager";
 
 
 export const UserSelectedPostDetails = () => {
@@ -20,6 +21,13 @@ useEffect(() => {
     }
 }, [postId]);
 
+const handleToggleApproval = () => {
+    togglePostApproval(postId, selectedPost.approved).then(() => {
+        getPostDetails(); 
+    });
+};
+
+
 return (
     <div>
         <h1>Post Details:</h1>
@@ -34,6 +42,9 @@ return (
                 </p>
                 <p>Category: {selectedPost?.category?.label}</p>
                 <p>Publication date & Time: {selectedPost?.publication_date}</p>
+                <p>Approved: {selectedPost.approved ? "Yes" : "No"}
+                <br />
+                <input type="checkbox" checked={selectedPost.approved} onChange={handleToggleApproval} /></p>
                 <p>Content: {selectedPost?.content}</p>
             </article>
         )}
