@@ -129,3 +129,12 @@ export const deleteTag = async (tagId) => {
 
   })
 }
+
+export const deleteComment = async (commentId) => {
+  await fetch(`http://localhost:8000/comments/${commentId}`, {
+    method: "DELETE",
+    headers: {
+      "Authorization": `Token ${localStorage.getItem("auth_token")}`
+    }
+  })
+}
