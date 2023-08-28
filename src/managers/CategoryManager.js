@@ -12,6 +12,7 @@ export const CategoryList = () => {
   });
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [error, setError] = useState(null);
+  const [showForm, setShowForm] = useState(false);
 
   const fetchCategories = async (sortParam, filterParam) => {
     const url = new URL('http://localhost:8000/categories');
@@ -112,6 +113,35 @@ export const CategoryList = () => {
   return (
     <>
       <h2 className="category-title"> Categories </h2>
+      <button onClick={() => setShowForm(!showForm)}>
+        Create a new category
+      </button>
+
+      {showForm && (
+        <div className="category-form-container">
+          <form className="category-form">
+            <h2 className="category-form__title">Create a new category</h2>
+            <fieldset>
+              <div className="form-group">
+                <textarea
+                  required
+                  autoFocus
+                  className="form-control"
+                  placeholder="Add Text"
+                  value={newCategory.label}
+                  onChange={(evt) => {
+                    const copy = { ...newCategory };
+                    copy.label = evt.target.value;
+                    updateNewCategory(copy);
+                  }}
+                />
+              </div>
+            </fieldset>
+            <button onClick={handleAddingCategory}>Create</button>
+            <button onClick={() => setShowForm(false)}>Cancel</button>
+          </form>
+        </div>
+      )}
 
       <div className="category-list-container">
         {categories.map((category) => (
@@ -196,28 +226,6 @@ export const CategoryList = () => {
           ></button>
         </div>
       )}
-      <div className="category-form-container">
-        <form className="category-form">
-          <h2 className="category-form__title">Create a new category</h2>
-          <fieldset>
-            <div className="form-group">
-              <textarea
-                required
-                autoFocus
-                className="form-control"
-                placeholder="Add Text"
-                value={newCategory.label}
-                onChange={(evt) => {
-                  const copy = { ...newCategory };
-                  copy.label = evt.target.value;
-                  updateNewCategory(copy);
-                }}
-              />
-            </div>
-          </fieldset>
-          <button onClick={handleAddingCategory}>Create</button>
-        </form>
-      </div>
     </>
   );
 };
