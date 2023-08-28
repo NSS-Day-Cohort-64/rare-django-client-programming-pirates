@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { getPostById} from "../../../managers/posts";
 import "./myPosts.css";
 
@@ -7,6 +7,7 @@ export const UserSelectedPostDetails = () => {
     const { postId } = useParams();
     const [selectedPost, setSelectedPost] = useState([]);
     const [postComments, setPostComments ] = useState([]);
+    const navigate = useNavigate();
 
     const getPostDetails = () => {
         getPostById({ postId }).then((UserSelectedPostDetails) => {
@@ -60,11 +61,12 @@ return (
                 {postComments.map(comment => (
                     <li key={comment.id}>{comment.content}</li>
                 ))}
+                <button onClick={() => navigate(`/posts/UserPosts/EditCommentForm/${postComments.id}`)}> Edit </button>
             </ul>
         </div>
         <button>
             <Link to={`/posts/${postId}/add-comment`}>Add Comment</Link>
         </button>
-    </div>
+        </div>
 );
 }
