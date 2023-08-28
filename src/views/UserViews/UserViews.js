@@ -9,6 +9,7 @@ import { CreateNewUserPost } from "../../components/posts/UserPosts/UserNewPosts
 import { EditUserPost } from "../../components/posts/UserPosts/UserEditPost"
 import { Profile } from "../../profile/Profile"
 import { UserPostCommentView } from "../../components/posts/UserPosts/UserPostCommentView"
+import { UserAddComment } from "../../components/posts/UserPosts/UserAddComment"
 
 
 
@@ -24,7 +25,8 @@ export const UserViews = () => {
             <Route path="/posts/UserPosts/NewUserPost" element={<CreateNewUserPost />} />
             <Route path="/posts/UserPosts/UserEditPost/:postId" element={<EditUserPost />} />
             <Route path="/Profile/:userId" element={<Profile />} />
-            <Route path="/posts/:postId/add-comment" element={<UserPostCommentView />} />
+            <Route path="/posts/:postId/add-comment" element={<UserAddComment />} />
+            <Route path="/posts/:postId/view-comments" element={<UserPostCommentView />} />
     </Routes>
 );
 };

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./myPosts.css";
 
+
 export const UserSelectedPostDetails = () => {
     const { postId } = useParams();
     const [selectedPost, setSelectedPost] = useState([]);
-    const [postComments, setPostComments ] = useState([]);
 
     const getPosts = () => {
         fetch(`http://localhost:8000/posts/${postId}`, {
@@ -31,30 +31,11 @@ export const UserSelectedPostDetails = () => {
 //         });
 //     };
 
-    const getComments = () => {
-        fetch(`http://localhost:8000/comments?post=${postId}`, {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Token ${localStorage.getItem("auth_token")}`,
-            },
-        })
-        .then(response => response.json())
-        .then((commentArray) => {
-            setPostComments(commentArray); 
-        })
+useEffect(() => {
+    if (postId) {
+    getPostDetails();
     }
-
-    useEffect(() => {
-
-        getPosts();
-        getComments();
-    }, []);
-
-//         if (postId) {
-//             getPostDetails();
-//         }
-//     }, [postId]);
-// >>>>>>> main
+}, [postId]);
 
 return (
     <div>
@@ -73,16 +54,15 @@ return (
                 <p>Content: {selectedPost?.content}</p>
             </article>
         )}
+        
         <div>
-            <h2>Comments:</h2>
-            <ul>
-                {postComments.map(comment => (
-                    <li key={comment.id}>{comment.content} by {comment.author}</li>
-                ))}
-            </ul>
+            <Link to={`/posts/${postId}/view-comments`}>
+            <button>View Comments</button>
+            </Link>
+            <Link to={`/posts/${postId}/add-comment`}>
+            <button>Add Comment</button>
+            </Link>
         </div>
-        <button>
-            <Link to={`/posts/${postId}/add-comment`}>Add Comment</Link>
-        </button>
     </div>
 );
+        }
