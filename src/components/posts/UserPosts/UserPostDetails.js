@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getPostById} from "../../../managers/posts";
+import { getPostById } from "../../../managers/posts";
 import "./myPosts.css";
 
 
